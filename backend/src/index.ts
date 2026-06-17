@@ -33,9 +33,9 @@ app.get('/health', (_req: Request, res: Response) => {
 });
 
 // Global error handler
-app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
-  console.error('[ERROR]', err.message);
-  res.status(500).json({ error: 'Internal server error' });
+app.use((err: Error & { code?: string }, _req: Request, res: Response, _next: NextFunction) => {
+  console.error('[ERROR]', err.code ?? '', err.message);
+  res.status(500).json({ error: 'Internal server error', detail: err.message });
 });
 
 app.listen(PORT, () => {
