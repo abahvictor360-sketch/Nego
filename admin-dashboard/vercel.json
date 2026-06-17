@@ -1,11 +1,5 @@
 {
   "framework": "nextjs",
   "buildCommand": "npm run build",
-  "outputDirectory": ".next",
-  "env": {
-    "BACKEND_API_URL": "@nego-backend-url",
-    "SESSION_SECRET": "@nego-session-secret",
-    "NEXT_PUBLIC_APP_URL": "@nego-app-url",
-    "NEXT_PUBLIC_BACKEND_URL": "@nego-backend-url"
-  }
+  "outputDirectory": ".next"
 }
