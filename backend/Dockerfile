@@ -31,4 +31,4 @@ COPY prisma ./prisma/
 
 EXPOSE 3001
 
-CMD ["sh", "-c", "npx prisma db push --accept-data-loss && node dist/index.js"]
+CMD ["sh", "-c", "echo \"DB_URL_PREFIX=${DATABASE_URL:0:30}\" && npx prisma db push --accept-data-loss && node dist/index.js"]
