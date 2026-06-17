@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nego Widget — Dev Preview</title>
+    <style>
+      body { font-family: system-ui, sans-serif; background: #f8f9fa; margin: 0; padding: 40px; }
+      .product-card { background: white; border-radius: 16px; padding: 32px; max-width: 480px; box-shadow: 0 2px 12px rgba(0,0,0,.08); }
+      h1 { font-size: 22px; margin: 0 0 8px; }
+      .price { font-size: 28px; font-weight: 700; color: #1a1a2e; margin: 12px 0; }
+      .desc { color: #6b7280; font-size: 14px; }
+      .hint { margin-top: 24px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #166534; }
+    </style>
+  </head>
+  <body>
+    <div class="product-card">
+      <p class="desc">Premium Electronics</p>
+      <h1>Sony WH-1000XM5 Headphones</h1>
+      <div class="price">$349.00</div>
+      <p class="desc">Industry-leading noise cancellation, 30-hour battery, and crystal-clear call quality.</p>
+      <div class="hint">💬 <strong>Nego Bot active</strong> — click the chat bubble in the bottom-right to start negotiating!</div>
+    </div>
+    <!-- The widget mounts here via React dev entry -->
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

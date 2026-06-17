@@ -13,13 +13,13 @@
     "db:reset": "prisma migrate reset"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.104.2",
     "@prisma/client": "^5.22.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "helmet": "^8.0.0",
-    "openai": "^6.43.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {

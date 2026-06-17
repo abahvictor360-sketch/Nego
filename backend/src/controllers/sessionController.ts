@@ -1,7 +1,7 @@
 import { Response } from 'express';
 import { z } from 'zod';
 import { prisma } from '../lib/prisma';
-import { getOpenAIClient } from '../ai/openai';
+import { getAnthropicClient } from '../ai/anthropic';
 import { buildSystemPrompt } from '../ai/promptBuilder';
 import { parseAIResponse, NegotiationResponse } from '../ai/responseParser';
 import { generateCheckoutUrl } from '../services/checkoutService';
@@ -79,27 +79,26 @@ export async function sendMessage(req: AuthenticatedRequest, res: Response): Pro
   // Persist the user's message first
   await prisma.message.create({ data: { sessionId, role: 'user', content: message } });
 
-  // Build conversation history for OpenAI
+  // Build conversation history for Anthropic
   const systemPrompt = buildSystemPrompt(session.product);
   const history = session.messages.map(m => ({
     role: m.role as 'user' | 'assistant',
     content: m.content,
   }));
 
-  const openai = getOpenAIClient();
-  const completion = await openai.chat.completions.create({
-    model: 'gpt-4o',
+  const anthropic = getAnthropicClient();
+  const completion = await anthropic.messages.create({
+    model: 'claude-opus-4-8',
+    system: systemPrompt,
     messages: [
-      { role: 'system', content: systemPrompt },
       ...history,
       { role: 'user', content: message },
     ],
-    temperature: 0.7,
     max_tokens: 300,
-    response_format: { type: 'json_object' },
   });
 
-  const rawAI = completion.choices[0]?.message?.content
+  const firstBlock = completion.content[0];
+  const rawAI = (firstBlock?.type === 'text' ? firstBlock.text : null)
     ?? '{"status":"countering","message":"Let me think about that."}';
 
   let parsed = parseAIResponse(rawAI);
