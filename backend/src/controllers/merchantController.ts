@@ -42,3 +42,30 @@ export async function createMerchant(req: Request, res: Response): Promise<void>
 export async function getMerchantProfile(req: AuthenticatedRequest, res: Response): Promise<void> {
   res.json(req.merchant);
 }
+
+const loginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(1),
+});
+
+export async function loginMerchant(req: Request, res: Response): Promise<void> {
+  const result = loginSchema.safeParse(req.body);
+  if (!result.success) {
+    res.status(400).json({ error: result.error.flatten().fieldErrors });
+    return;
+  }
+
+  const { email, password } = result.data;
+  const merchant = await prisma.merchant.findUnique({
+    where: { email },
+    select: { id: true, name: true, email: true, apiKey: true, password: true },
+  });
+
+  if (!merchant || !(await bcrypt.compare(password, merchant.password))) {
+    res.status(401).json({ error: 'Invalid email or password' });
+    return;
+  }
+
+  const { password: _pw, ...safe } = merchant;
+  res.json(safe);
+}
