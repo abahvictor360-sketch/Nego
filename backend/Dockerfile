@@ -31,4 +31,4 @@ COPY prisma ./prisma/
 
 EXPOSE 3001
 
-CMD ["sh", "-c", "npx prisma db push --accept-data-loss && node dist/index.js"]
+CMD ["sh", "-c", "export DATABASE_URL=$(echo \"$DATABASE_URL\" | sed 's|://postgres:|://postgres.tamcebxiwxaiwaglmcqc:|') && node dist/index.js"]
