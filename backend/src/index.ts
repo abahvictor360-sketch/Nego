@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import merchantRoutes from './routes/merchants';
 import productRoutes from './routes/products';
 import sessionRoutes from './routes/sessions';
+import { apiLimiter } from './middleware/rateLimiter';
 
 dotenv.config();
 
@@ -16,6 +17,9 @@ const PORT = process.env.PORT ?? 3001;
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+
+// Global rate limit
+app.use('/api', apiLimiter);
 
 // Routes
 app.use('/api/merchants', merchantRoutes);

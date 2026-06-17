@@ -18,5 +18,25 @@ services:
       timeout: 5s
       retries: 5
 
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://nego:nego_dev_password@postgres:5432/negodb
+      PORT: 3001
+      NODE_ENV: production
+      # Fill these in a .env file or set them explicitly:
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      CHECKOUT_SECRET: ${CHECKOUT_SECRET}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY:-}
+      DEFAULT_STORE_URL: ${DEFAULT_STORE_URL:-https://your-store.com}
+
 volumes:
   postgres_data:

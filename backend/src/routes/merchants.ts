@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { createMerchant, getMerchantProfile, loginMerchant } from '../controllers/merchantController';
+import { loginLimiter } from '../middleware/rateLimiter';
 import { apiKeyAuth } from '../middleware/apiKeyAuth';
 
 const router = Router();
@@ -8,7 +9,7 @@ const router = Router();
 router.post('/', createMerchant);
 
 // Public: login — returns merchant info + apiKey
-router.post('/login', loginMerchant);
+router.post('/login', loginLimiter, loginMerchant);
 
 // Protected: view your own profile
 router.get('/me', apiKeyAuth, getMerchantProfile);

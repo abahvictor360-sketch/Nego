@@ -5,6 +5,7 @@ import { getAnthropicClient } from '../ai/anthropic';
 import { buildSystemPrompt } from '../ai/promptBuilder';
 import { parseAIResponse, NegotiationResponse } from '../ai/responseParser';
 import { generateCheckoutUrl } from '../services/checkoutService';
+import { createStripeCheckoutSession, isStripeEnabled } from '../services/stripeService';
 import { AuthenticatedRequest } from '../middleware/apiKeyAuth';
 
 const createSessionSchema = z.object({
@@ -129,11 +130,25 @@ export async function sendMessage(req: AuthenticatedRequest, res: Response): Pro
     const listPrice = Number(session.product.listPrice);
     const discountPercent = ((listPrice - agreedPrice) / listPrice) * 100;
 
-    const storeUrl = (req.body.storeUrl as string | undefined)
-      ?? process.env.DEFAULT_STORE_URL
-      ?? 'https://your-store.com';
+    let checkoutUrl: string;
 
-    const checkoutUrl = generateCheckoutUrl({ storeUrl, productId: session.productId, agreedPrice, sessionId });
+    if (isStripeEnabled()) {
+      const appUrl = process.env.DEFAULT_STORE_URL ?? 'https://your-store.com';
+      const stripeUrl = await createStripeCheckoutSession({
+        productName: session.product.name,
+        currency: session.product.currency,
+        agreedPrice,
+        sessionId,
+        successUrl: appUrl,
+        cancelUrl: appUrl,
+      });
+      checkoutUrl = stripeUrl ?? appUrl;
+    } else {
+      const storeUrl = (req.body.storeUrl as string | undefined)
+        ?? process.env.DEFAULT_STORE_URL
+        ?? 'https://your-store.com';
+      checkoutUrl = generateCheckoutUrl({ storeUrl, productId: session.productId, agreedPrice, sessionId });
+    }
 
     await prisma.chatSession.update({
       where: { id: sessionId },
