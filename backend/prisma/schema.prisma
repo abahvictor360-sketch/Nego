@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Merchant {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String   // bcrypt hash — never returned to client
+  apiKey    String   @unique @default(cuid())
+  createdAt DateTime @default(now())
+
+  products Product[]
+  sessions ChatSession[]
+
+  @@map("merchants")
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  merchantId  String
+  name        String
+  description String?
+  listPrice   Decimal  @db.Decimal(10, 2)
+  floorPrice  Decimal  @db.Decimal(10, 2) // NEVER sent to AI or client
+  currency    String   @default("USD")
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  merchant Merchant    @relation(fields: [merchantId], references: [id])
+  sessions ChatSession[]
+
+  @@map("products")
+}
+
+model ChatSession {
+  id                 String    @id @default(cuid())
+  merchantId         String
+  productId          String
+  channel            String    // "web" | "mobile" | "instore_qr"
+  status             String    @default("active") // "active" | "agreed" | "abandoned" | "rejected"
+  startedAt          DateTime  @default(now())
+  endedAt            DateTime?
+  finalAgreedPrice   Decimal?  @db.Decimal(10, 2)
+  discountPercent    Decimal?  @db.Decimal(5, 2)
+  checkoutUrl        String?
+  customerIdentifier String?   // anonymous browser fingerprint or email
+
+  merchant Merchant  @relation(fields: [merchantId], references: [id])
+  product  Product   @relation(fields: [productId], references: [id])
+  messages Message[]
+
+  @@map("chat_sessions")
+}
+
+model Message {
+  id        String      @id @default(cuid())
+  sessionId String
+  role      String      // "system" | "user" | "assistant"
+  content   String      @db.Text
+  createdAt DateTime    @default(now())
+
+  session ChatSession @relation(fields: [sessionId], references: [id])
+
+  @@map("messages")
+}

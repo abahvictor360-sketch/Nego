@@ -1,0 +1,25 @@
+node_modules/
+dist/
+.env
+*.env.local
+.DS_Store
+Thumbs.db
+
+# Prisma generated
+prisma/migrations/dev.db
+prisma/*.db
+
+# Next.js (admin dashboard — Step 4)
+.next/
+out/
+
+# Vite (chat widget — Step 3)
+chat-widget/dist/
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
