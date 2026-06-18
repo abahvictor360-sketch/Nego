@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createMerchant, getMerchantProfile, loginMerchant } from '../controllers/merchantController';
+import { createMerchant, getMerchantProfile, loginMerchant, changePassword } from '../controllers/merchantController';
 import { loginLimiter } from '../middleware/rateLimiter';
 import { apiKeyAuth } from '../middleware/apiKeyAuth';
 
@@ -13,5 +13,8 @@ router.post('/login', loginLimiter, loginMerchant);
 
 // Protected: view your own profile
 router.get('/me', apiKeyAuth, getMerchantProfile);
+
+// Protected: change password
+router.patch('/me/password', apiKeyAuth, changePassword);
 
 export default router;

@@ -2,13 +2,14 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { getSession } from '@/lib/session';
 import LogoutButton from './LogoutButton';
-import { BarChart3, Package, MessageSquare, SquarePen, MessageCircle, type LucideIcon } from 'lucide-react';
+import { BarChart3, Package, MessageSquare, SquarePen, MessageCircle, Settings, type LucideIcon } from 'lucide-react';
 
 const navItems: { href: string; label: string; Icon: LucideIcon }[] = [
   { href: '/dashboard', label: 'Analytics', Icon: BarChart3 },
   { href: '/dashboard/products', label: 'Products', Icon: Package },
   { href: '/dashboard/sessions', label: 'Sessions', Icon: MessageSquare },
   { href: '/dashboard/content', label: 'Landing Page', Icon: SquarePen },
+  { href: '/dashboard/settings', label: 'Settings', Icon: Settings },
 ];
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {

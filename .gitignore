@@ -16,6 +16,9 @@ out/
 # Vite (chat widget — Step 3)
 chat-widget/dist/
 
+# Allow backend public assets (built widget bundle)
+!backend/public/
+
 # IDE
 .vscode/
 .idea/

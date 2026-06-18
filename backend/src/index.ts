@@ -3,6 +3,7 @@ import 'express-async-errors';
 import cors from 'cors';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
+import path from 'path';
 
 import merchantRoutes from './routes/merchants';
 import productRoutes from './routes/products';
@@ -19,6 +20,16 @@ const PORT = process.env.PORT ?? 3001;
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+
+// Serve widget bundle as a public static file
+app.use(express.static(path.join(__dirname, '..', 'public'), {
+  setHeaders(res, filePath) {
+    if (filePath.endsWith('.js') || filePath.endsWith('.css')) {
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Cache-Control', 'public, max-age=86400');
+    }
+  },
+}));
 
 // Global rate limit
 app.use('/api', apiLimiter);

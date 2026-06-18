@@ -43,6 +43,37 @@ export async function getMerchantProfile(req: AuthenticatedRequest, res: Respons
   res.json(req.merchant);
 }
 
+const changePasswordSchema = z.object({
+  currentPassword: z.string().min(1),
+  newPassword: z.string().min(8, 'New password must be at least 8 characters'),
+});
+
+export async function changePassword(req: AuthenticatedRequest, res: Response): Promise<void> {
+  const result = changePasswordSchema.safeParse(req.body);
+  if (!result.success) {
+    res.status(400).json({ error: result.error.flatten().fieldErrors });
+    return;
+  }
+
+  const { currentPassword, newPassword } = result.data;
+  const merchant = await prisma.merchant.findUnique({
+    where: { id: req.merchant!.id },
+    select: { password: true },
+  });
+
+  if (!merchant || !(await bcrypt.compare(currentPassword, merchant.password))) {
+    res.status(401).json({ error: 'Current password is incorrect' });
+    return;
+  }
+
+  await prisma.merchant.update({
+    where: { id: req.merchant!.id },
+    data: { password: await bcrypt.hash(newPassword, 12) },
+  });
+
+  res.json({ success: true });
+}
+
 const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(1),
@@ -56,12 +87,10 @@ export async function loginMerchant(req: Request, res: Response): Promise<void> 
   }
 
   const { email, password } = result.data;
-  console.log('[LOGIN] attempt for:', email);
   const merchant = await prisma.merchant.findUnique({
     where: { email },
     select: { id: true, name: true, email: true, apiKey: true, password: true },
   });
-  console.log('[LOGIN] found merchant:', merchant ? merchant.email : 'null');
 
   if (!merchant) {
     res.status(401).json({ error: 'Invalid email or password' });
@@ -69,7 +98,6 @@ export async function loginMerchant(req: Request, res: Response): Promise<void> 
   }
 
   const passwordMatch = await bcrypt.compare(password, merchant.password);
-  console.log('[LOGIN] password match:', passwordMatch);
 
   if (!passwordMatch) {
     res.status(401).json({ error: 'Invalid email or password' });

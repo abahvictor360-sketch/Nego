@@ -1,7 +1,27 @@
 'use client';
 
 import { useState } from 'react';
+import { Copy, Check } from 'lucide-react';
 import type { Product } from '@/lib/api';
+
+function CopyId({ id }: { id: string }) {
+  const [copied, setCopied] = useState(false);
+  async function handleCopy() {
+    await navigator.clipboard.writeText(id);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1800);
+  }
+  return (
+    <button
+      onClick={handleCopy}
+      title="Copy product ID for embed snippet"
+      className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-violet-600 transition-colors"
+    >
+      {copied ? <Check className="w-3.5 h-3.5 text-green-500" /> : <Copy className="w-3.5 h-3.5" />}
+      <span className="font-mono">{id.slice(-8)}</span>
+    </button>
+  );
+}
 
 const BASE = process.env.NEXT_PUBLIC_BACKEND_URL ?? 'http://localhost:3001';
 
@@ -143,7 +163,7 @@ export default function ProductsClient({ initialProducts, apiKey }: Props) {
           <table className="w-full text-sm">
             <thead className="bg-gray-50 text-gray-500 text-xs uppercase tracking-wide">
               <tr>
-                {['Name', 'List Price', 'Floor Price', 'Currency', 'Active', ''].map(h => (
+                {['Name', 'List Price', 'Floor Price', 'Currency', 'Active', 'Product ID', ''].map(h => (
                   <th key={h} className="px-6 py-3 text-left font-medium">{h}</th>
                 ))}
               </tr>
@@ -159,6 +179,9 @@ export default function ProductsClient({ initialProducts, apiKey }: Props) {
                     <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${p.isActive ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
                       {p.isActive ? 'Active' : 'Inactive'}
                     </span>
+                  </td>
+                  <td className="px-6 py-3">
+                    <CopyId id={p.id} />
                   </td>
                   <td className="px-6 py-3">
                     <div className="flex gap-2 justify-end">
