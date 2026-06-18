@@ -56,12 +56,22 @@ export async function loginMerchant(req: Request, res: Response): Promise<void> 
   }
 
   const { email, password } = result.data;
+  console.log('[LOGIN] attempt for:', email);
   const merchant = await prisma.merchant.findUnique({
     where: { email },
     select: { id: true, name: true, email: true, apiKey: true, password: true },
   });
+  console.log('[LOGIN] found merchant:', merchant ? merchant.email : 'null');
 
-  if (!merchant || !(await bcrypt.compare(password, merchant.password))) {
+  if (!merchant) {
+    res.status(401).json({ error: 'Invalid email or password' });
+    return;
+  }
+
+  const passwordMatch = await bcrypt.compare(password, merchant.password);
+  console.log('[LOGIN] password match:', passwordMatch);
+
+  if (!passwordMatch) {
     res.status(401).json({ error: 'Invalid email or password' });
     return;
   }
