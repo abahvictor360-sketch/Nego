@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { saveContentAction } from './actions';
 
+const BACKEND = process.env.NEXT_PUBLIC_BACKEND_URL ?? 'http://localhost:3001';
+
 type Tab = 'hero' | 'features' | 'how_it_works' | 'cta' | 'signup';
 
 const TABS: { id: Tab; label: string; icon: string }[] = [
