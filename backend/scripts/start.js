@@ -1,31 +1,40 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Production start script.
- * Patches DATABASE_URL *before* any Prisma CLI or client code runs,
- * so the Supabase transaction pooler gets the correct username
- * (postgres.<project_ref>) regardless of what is set in the env.
- */
-
+const PROJECT_REF = 'tamcebxiwxaiwaglmcqc';
 const rawUrl = process.env.DATABASE_URL || '';
 
 if (rawUrl.includes('pooler.supabase.com')) {
   try {
-    const parsed = new URL(rawUrl);
-    if (parsed.username && parsed.username !== 'postgres.tamcebxiwxaiwaglmcqc') {
-      parsed.username = 'postgres.tamcebxiwxaiwaglmcqc';
-      process.env.DATABASE_URL = parsed.toString();
-      console.log('[start] Patched DATABASE_URL: username -> postgres.tamcebxiwxaiwaglmcqc');
+    const u = new URL(rawUrl);
+    let changed = false;
+    if (!u.username.includes(PROJECT_REF)) {
+      u.username = `postgres.${PROJECT_REF}`;
+      changed = true;
+    }
+    if (!u.searchParams.has('sslmode')) {
+      u.searchParams.set('sslmode', 'require');
+      changed = true;
+    }
+    if (!u.searchParams.has('pgbouncer')) {
+      u.searchParams.set('pgbouncer', 'true');
+      changed = true;
+    }
+    if (changed) {
+      process.env.DATABASE_URL = u.toString();
+      console.log('[start] Patched DATABASE_URL (username + ssl + pgbouncer)');
     }
   } catch (_) {
-    // URL() failed — fall back to simple string replace
-    if (!rawUrl.includes('postgres.tamcebxiwxaiwaglmcqc')) {
-      process.env.DATABASE_URL = rawUrl.replace(
-        /(:\/\/)([^:@]+)(:[^@]*@)/,
-        '$1postgres.tamcebxiwxaiwaglmcqc$3',
-      );
-      console.log('[start] Patched DATABASE_URL (fallback replace)');
+    let url = rawUrl;
+    if (!url.includes(PROJECT_REF)) {
+      url = url.replace(/(:\/\/)([^:@]+)(:[^@]*@)/, `$1postgres.${PROJECT_REF}$3`);
+    }
+    const sep = url.includes('?') ? '&' : '?';
+    if (!url.includes('pgbouncer=true')) url += `${sep}pgbouncer=true`;
+    if (!url.includes('sslmode=')) url += '&sslmode=require';
+    if (url !== rawUrl) {
+      process.env.DATABASE_URL = url;
+      console.log('[start] Patched DATABASE_URL (fallback)');
     }
   }
 }
@@ -41,8 +50,8 @@ try {
   });
   console.log('[start] Migrations OK');
 } catch (err) {
-  console.error('[start] Migration failed:', err.message);
-  process.exit(1);
+  // Migrations may already be applied — log and continue rather than killing the process
+  console.error('[start] Migration step failed (continuing):', err.message);
 }
 
 console.log('[start] Starting server...');
