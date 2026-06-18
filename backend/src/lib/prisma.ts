@@ -2,53 +2,36 @@ import { PrismaClient } from '@prisma/client';
 
 const PROJECT_REF = 'tamcebxiwxaiwaglmcqc';
 
-function patchDbUrl(raw: string): string {
-  if (!raw || !raw.includes('pooler.supabase.com')) return raw;
+function buildDatabaseUrl(): string {
+  const raw = process.env.DATABASE_URL ?? '';
+  if (!raw.includes('pooler.supabase.com')) return raw;
 
+  // The transaction pooler requires a "postgres.<project_ref>" username which
+  // Render's env var doesn't have, and the username patch keeps failing in
+  // production for unclear environmental reasons. The reliable fix is to switch
+  // to the direct host (db.<ref>.supabase.co:5432) which accepts plain "postgres".
   try {
     const u = new URL(raw);
-    let changed = false;
-
-    if (!u.username.includes(PROJECT_REF)) {
-      u.username = `postgres.${PROJECT_REF}`;
-      changed = true;
-    }
-    // sslmode=require forces TLS → pooler receives SNI hostname as tenant identifier
-    if (!u.searchParams.has('sslmode')) {
-      u.searchParams.set('sslmode', 'require');
-      changed = true;
-    }
-    // pgbouncer=true disables prepared statements (required for transaction pooler)
-    if (!u.searchParams.has('pgbouncer')) {
-      u.searchParams.set('pgbouncer', 'true');
-      changed = true;
-    }
-
-    if (changed) {
-      const patched = u.toString();
-      process.env.DATABASE_URL = patched;
-      console.log('[prisma] Patched DATABASE_URL for Supabase pooler');
-      return patched;
-    }
-    return raw;
+    u.username = 'postgres';
+    u.hostname = `db.${PROJECT_REF}.supabase.co`;
+    u.port = '5432';
+    u.searchParams.delete('pgbouncer');
+    const direct = u.toString();
+    process.env.DATABASE_URL = direct;
+    console.log('[prisma] Switched to direct Supabase connection (bypassed pooler)');
+    return direct;
   } catch {
     // URL() failed — regex fallback
-    let url = raw;
-    if (!url.includes(PROJECT_REF)) {
-      url = url.replace(/(:\/\/)([^:@]+)(:[^@]*@)/, `$1postgres.${PROJECT_REF}$3`);
-    }
-    const sep = url.includes('?') ? '&' : '?';
-    if (!url.includes('pgbouncer=true')) url += `${sep}pgbouncer=true`;
-    if (!url.includes('sslmode=')) url += '&sslmode=require';
-    if (url !== raw) {
-      process.env.DATABASE_URL = url;
-      console.log('[prisma] Patched DATABASE_URL (fallback)');
-    }
-    return url;
+    const direct = raw
+      .replace(/aws-\d+-[a-z0-9-]+\.pooler\.supabase\.com:\d+/i, `db.${PROJECT_REF}.supabase.co:5432`)
+      .replace(/postgres\.[^:@]+(:)/i, 'postgres$1');
+    process.env.DATABASE_URL = direct;
+    console.log('[prisma] Switched to direct connection (fallback regex)');
+    return direct;
   }
 }
 
-const dbUrl = patchDbUrl(process.env.DATABASE_URL ?? '');
+const dbUrl = buildDatabaseUrl();
 
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
 

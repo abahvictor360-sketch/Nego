@@ -4,38 +4,22 @@
 const PROJECT_REF = 'tamcebxiwxaiwaglmcqc';
 const rawUrl = process.env.DATABASE_URL || '';
 
+// Convert pooler URL → direct connection so prisma migrate deploy works
+// without needing the postgres.<ref> username format the pooler requires.
 if (rawUrl.includes('pooler.supabase.com')) {
   try {
     const u = new URL(rawUrl);
-    let changed = false;
-    if (!u.username.includes(PROJECT_REF)) {
-      u.username = `postgres.${PROJECT_REF}`;
-      changed = true;
-    }
-    if (!u.searchParams.has('sslmode')) {
-      u.searchParams.set('sslmode', 'require');
-      changed = true;
-    }
-    if (!u.searchParams.has('pgbouncer')) {
-      u.searchParams.set('pgbouncer', 'true');
-      changed = true;
-    }
-    if (changed) {
-      process.env.DATABASE_URL = u.toString();
-      console.log('[start] Patched DATABASE_URL (username + ssl + pgbouncer)');
-    }
+    u.username = 'postgres';
+    u.hostname = `db.${PROJECT_REF}.supabase.co`;
+    u.port = '5432';
+    u.searchParams.delete('pgbouncer');
+    process.env.DATABASE_URL = u.toString();
+    console.log('[start] Converted pooler URL to direct Supabase connection');
   } catch (_) {
-    let url = rawUrl;
-    if (!url.includes(PROJECT_REF)) {
-      url = url.replace(/(:\/\/)([^:@]+)(:[^@]*@)/, `$1postgres.${PROJECT_REF}$3`);
-    }
-    const sep = url.includes('?') ? '&' : '?';
-    if (!url.includes('pgbouncer=true')) url += `${sep}pgbouncer=true`;
-    if (!url.includes('sslmode=')) url += '&sslmode=require';
-    if (url !== rawUrl) {
-      process.env.DATABASE_URL = url;
-      console.log('[start] Patched DATABASE_URL (fallback)');
-    }
+    process.env.DATABASE_URL = rawUrl
+      .replace(/aws-\d+-[a-z0-9-]+\.pooler\.supabase\.com:\d+/i, `db.${PROJECT_REF}.supabase.co:5432`)
+      .replace(/postgres\.[^:@]+(:)/i, 'postgres$1');
+    console.log('[start] Converted to direct connection (fallback regex)');
   }
 }
 
@@ -50,8 +34,7 @@ try {
   });
   console.log('[start] Migrations OK');
 } catch (err) {
-  // Migrations may already be applied — log and continue rather than killing the process
-  console.error('[start] Migration step failed (continuing):', err.message);
+  console.error('[start] Migration failed (continuing):', err.message);
 }
 
 console.log('[start] Starting server...');
