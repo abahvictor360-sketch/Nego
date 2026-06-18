@@ -4,10 +4,7 @@ services:
     runtime: node
     rootDir: backend
     buildCommand: npm ci && npx prisma generate && npm run build
-    startCommand: >-
-      export DATABASE_URL=$(echo "$DATABASE_URL" | sed 's|://postgres:|://postgres.tamcebxiwxaiwaglmcqc:|') &&
-      npx prisma migrate deploy &&
-      node dist/index.js
+    startCommand: npx prisma migrate deploy && node dist/index.js
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
