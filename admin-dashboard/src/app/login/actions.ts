@@ -1,14 +1,13 @@
 'use server';
 
 import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
 import { signSession } from '@/lib/jwt';
 import { SESSION_COOKIE } from '@/lib/session';
 
 export async function loginAction(
-  _prev: { error: string } | null,
+  _prev: { error: string; success?: boolean } | null,
   formData: FormData,
-): Promise<{ error: string }> {
+): Promise<{ error: string; success?: boolean }> {
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
 
@@ -45,8 +44,8 @@ export async function loginAction(
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
     path: '/',
-    maxAge: 60 * 60 * 24 * 7, // 7 days
+    maxAge: 60 * 60 * 24 * 7,
   });
 
-  redirect('/dashboard');
+  return { error: '', success: true };
 }
