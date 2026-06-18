@@ -37,7 +37,19 @@ export interface Session {
   endedAt: string | null;
   finalAgreedPrice: string | null;
   discountPercent: string | null;
+  checkoutUrl?: string | null;
   product: { name: string; listPrice: string; currency: string };
+}
+
+export interface Message {
+  id: string;
+  role: 'user' | 'assistant' | 'system';
+  content: string;
+  createdAt: string;
+}
+
+export interface SessionDetail extends Session {
+  messages: Message[];
 }
 
 export const api = {
@@ -54,5 +66,6 @@ export const api = {
   },
   sessions: {
     list: (apiKey: string) => apiFetch<Session[]>('/api/sessions', apiKey),
+    get: (apiKey: string, id: string) => apiFetch<SessionDetail>(`/api/sessions/${id}`, apiKey),
   },
 };

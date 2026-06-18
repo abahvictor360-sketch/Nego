@@ -172,7 +172,10 @@ export async function sendMessage(req: AuthenticatedRequest, res: Response): Pro
 export async function getSession(req: AuthenticatedRequest, res: Response): Promise<void> {
   const session = await prisma.chatSession.findFirst({
     where: { id: req.params.id as string, merchantId: req.merchant!.id },
-    include: { messages: { orderBy: { createdAt: 'asc' } } },
+    include: {
+      messages: { orderBy: { createdAt: 'asc' } },
+      product: { select: { name: true, listPrice: true, currency: true } },
+    },
     // floorPrice is NOT in the select — it stays server-side only
   });
 

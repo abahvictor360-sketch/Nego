@@ -73,12 +73,16 @@ export default async function SessionsPage({ searchParams }: Props) {
                     : '—';
 
                   return (
-                    <tr key={s.id} className="hover:bg-gray-50">
+                    <tr key={s.id} className="hover:bg-gray-50 cursor-pointer">
                       <td className="px-4 py-3 font-mono text-gray-400 text-xs">
-                        {s.id.slice(-8)}
+                        <Link href={`/dashboard/sessions/${s.id}`} className="hover:text-violet-600 transition-colors">
+                          {s.id.slice(-8)}
+                        </Link>
                       </td>
                       <td className="px-4 py-3 font-medium text-gray-800 max-w-[160px] truncate">
-                        {s.product.name}
+                        <Link href={`/dashboard/sessions/${s.id}`} className="hover:text-violet-600 transition-colors block">
+                          {s.product.name}
+                        </Link>
                       </td>
                       <td className="px-4 py-3 text-gray-500 capitalize">{s.channel}</td>
                       <td className="px-4 py-3">
