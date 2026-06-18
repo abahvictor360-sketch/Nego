@@ -2,6 +2,8 @@
 
 import { useInView } from '@/hooks/useInView';
 import type { FeaturesContent } from '@/lib/content';
+import Icon from './Icon';
+import { Sparkles, Globe, Smartphone, QrCode } from 'lucide-react';
 
 export default function Features({ content }: { content: FeaturesContent }) {
   const { ref: headerRef, inView: headerIn } = useInView();
@@ -15,7 +17,7 @@ export default function Features({ content }: { content: FeaturesContent }) {
           className={`text-center mb-16 transition-all duration-700 ${headerIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
         >
           <div className="badge inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold text-violet-700 mb-4">
-            ✦ {content.badge}
+            <Sparkles className="w-3.5 h-3.5" /> {content.badge}
           </div>
           <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-4">
             {content.title.split('close more deals')[0]}
@@ -33,8 +35,8 @@ export default function Features({ content }: { content: FeaturesContent }) {
               }`}
               style={{ transitionDelay: gridIn ? `${i * 100}ms` : '0ms' }}
             >
-              <div className={`w-12 h-12 rounded-xl ${f.color} flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform`}>
-                {f.icon}
+              <div className={`w-12 h-12 rounded-xl ${f.color} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform`}>
+                <Icon name={f.icon} className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">{f.title}</h3>
               <p className="text-gray-500 text-sm leading-relaxed mb-5">{f.description}</p>
@@ -54,14 +56,14 @@ export default function Features({ content }: { content: FeaturesContent }) {
 
         <div className={`mt-6 rounded-2xl bg-gradient-to-br from-violet-600 to-purple-700 p-8 sm:p-12 text-white flex flex-col sm:flex-row gap-8 items-center transition-all duration-700 delay-200 ${gridIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
           <div className="flex-1">
-            <div className="inline-flex items-center gap-2 bg-white/10 rounded-full px-3 py-1 text-xs font-semibold mb-4">🌐 Multi-channel</div>
+            <div className="inline-flex items-center gap-2 bg-white/10 rounded-full px-3 py-1 text-xs font-semibold mb-4"><Globe className="w-3.5 h-3.5" /> Multi-channel</div>
             <h3 className="text-2xl sm:text-3xl font-bold mb-3">Web, Mobile & In-Store QR</h3>
             <p className="text-violet-100 text-sm leading-relaxed max-w-lg">One negotiation bot, three channels. Embed on your website, power your mobile app, or print a QR code for brick-and-mortar stores.</p>
           </div>
           <div className="flex gap-3 sm:gap-4">
-            {[{ label: 'Web', icon: '🌐' }, { label: 'Mobile', icon: '📱' }, { label: 'In-Store QR', icon: '📲' }].map(ch => (
+            {[{ label: 'Web', Ico: Globe }, { label: 'Mobile', Ico: Smartphone }, { label: 'In-Store QR', Ico: QrCode }].map(ch => (
               <div key={ch.label} className="glass-dark rounded-2xl p-4 text-center min-w-[80px]">
-                <div className="text-2xl mb-1">{ch.icon}</div>
+                <ch.Ico className="w-6 h-6 mx-auto mb-1.5 text-white" />
                 <p className="text-xs font-medium text-white/80">{ch.label}</p>
               </div>
             ))}

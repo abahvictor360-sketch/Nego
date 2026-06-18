@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { MessageCircle, X, Menu } from 'lucide-react';
 
 const links = [
   { label: 'Features', href: '/#features' },
@@ -30,8 +31,8 @@ export default function Nav() {
     >
       <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 font-bold text-gray-900">
-          <span className="w-8 h-8 rounded-lg bg-violet-600 flex items-center justify-center text-white text-sm">
-            💬
+          <span className="w-8 h-8 rounded-lg bg-violet-600 flex items-center justify-center text-white">
+            <MessageCircle className="w-4 h-4" />
           </span>
           <span className="text-lg tracking-tight">Nego<span className="text-violet-600">Bot</span></span>
         </Link>
@@ -69,15 +70,7 @@ export default function Nav() {
           className="md:hidden text-gray-700 p-1"
           aria-label="Toggle menu"
         >
-          {menuOpen ? (
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          ) : (
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          )}
+          {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </nav>
 

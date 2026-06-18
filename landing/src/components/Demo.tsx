@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { Sparkles, ArrowRight, MessageCircle, PartyPopper } from 'lucide-react';
 
 const BACKEND = process.env.NEXT_PUBLIC_BACKEND_URL ?? 'http://localhost:3001';
 const DEMO_API_KEY = process.env.NEXT_PUBLIC_DEMO_API_KEY ?? '';
@@ -26,7 +27,7 @@ export default function Demo() {
     if (!DEMO_API_KEY || !DEMO_PRODUCT_ID) {
       setMessages([{
         role: 'assistant',
-        text: 'Hi! I\'m Max, your negotiation assistant 👋\n\nThis is a live demo of Nego Bot. To enable live negotiations, set NEXT_PUBLIC_DEMO_API_KEY and NEXT_PUBLIC_DEMO_PRODUCT_ID.\n\nFor now, try the real app by signing up above!',
+        text: 'Hi! I\'m Max, your negotiation assistant.\n\nThis is a live demo of Nego Bot. To enable live negotiations, set NEXT_PUBLIC_DEMO_API_KEY and NEXT_PUBLIC_DEMO_PRODUCT_ID.\n\nFor now, try the real app by signing up above!',
       }]);
       setStatus('open');
       return;
@@ -44,7 +45,7 @@ export default function Demo() {
       const price = parseFloat(data.product?.listPrice ?? '349').toFixed(2);
       setMessages([{
         role: 'assistant',
-        text: `Hi! I'm Max 👋 The ${data.product?.name ?? 'Sony WH-1000XM5'} is listed at $${price}. Make me an offer and let's see if we can strike a deal!`,
+        text: `Hi! I'm Max. The ${data.product?.name ?? 'Sony WH-1000XM5'} is listed at $${price}. Make me an offer and let's see if we can strike a deal!`,
       }]);
     } catch {
       setMessages([{ role: 'assistant', text: "Hi! I'm Max. Unfortunately I can't connect to the demo backend right now. Sign up to try for real!" }]);
@@ -91,7 +92,7 @@ export default function Demo() {
           {/* Left: copy */}
           <div className="lg:w-1/2">
             <div className="badge inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold text-violet-700 mb-4">
-              ✦ LIVE DEMO
+              <Sparkles className="w-3.5 h-3.5" /> LIVE DEMO
             </div>
             <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">
               Try it right now.{' '}
@@ -109,7 +110,7 @@ export default function Demo() {
                 'Watch the floor price guard in action',
               ].map(tip => (
                 <li key={tip} className="flex items-center gap-3 text-sm text-gray-600">
-                  <span className="w-6 h-6 rounded-full bg-violet-100 text-violet-600 flex items-center justify-center text-xs">→</span>
+                  <span className="w-6 h-6 rounded-full bg-violet-100 text-violet-600 flex items-center justify-center shrink-0"><ArrowRight className="w-3.5 h-3.5" /></span>
                   {tip}
                 </li>
               ))}
@@ -122,8 +123,8 @@ export default function Demo() {
               {status === 'idle' ? (
                 /* Launch button */
                 <div className="bg-gradient-to-br from-violet-50 to-purple-50 border border-violet-100 rounded-2xl p-8 text-center shadow-lg shadow-violet-50">
-                  <div className="w-16 h-16 rounded-2xl bg-violet-600 flex items-center justify-center text-3xl mx-auto mb-4 shadow-lg shadow-violet-300">
-                    💬
+                  <div className="w-16 h-16 rounded-2xl bg-violet-600 text-white flex items-center justify-center mx-auto mb-4 shadow-lg shadow-violet-300">
+                    <MessageCircle className="w-8 h-8" />
                   </div>
                   <h3 className="font-bold text-gray-900 text-lg mb-2">Chat with Max</h3>
                   <p className="text-sm text-gray-500 mb-6">
@@ -131,9 +132,9 @@ export default function Demo() {
                   </p>
                   <button
                     onClick={startDemo}
-                    className="w-full bg-violet-600 text-white font-semibold py-3 rounded-xl hover:bg-violet-700 transition-colors shadow-md shadow-violet-200"
+                    className="w-full bg-violet-600 text-white font-semibold py-3 rounded-xl hover:bg-violet-700 transition-colors shadow-md shadow-violet-200 inline-flex items-center justify-center gap-2"
                   >
-                    Start Negotiating →
+                    Start Negotiating <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
               ) : (
@@ -177,7 +178,7 @@ export default function Demo() {
 
                     {status === 'agreed' && checkoutUrl && (
                       <div className="bg-green-50 border border-green-200 rounded-xl p-3 text-center">
-                        <p className="text-green-700 font-semibold text-sm">🎉 Deal reached!</p>
+                        <p className="text-green-700 font-semibold text-sm inline-flex items-center gap-1.5"><PartyPopper className="w-4 h-4" /> Deal reached!</p>
                         <a href={checkoutUrl} className="inline-block mt-2 bg-green-600 text-white text-xs font-semibold px-4 py-1.5 rounded-lg">
                           Complete Purchase
                         </a>

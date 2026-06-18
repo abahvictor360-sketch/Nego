@@ -84,10 +84,10 @@ const DEFAULTS: SiteContent = {
     subtitle:
       'Empower your store with intelligent negotiation that converts hesitant shoppers into paying customers — without sacrificing your margins.',
     items: [
-      { icon: '🤖', color: 'bg-violet-50 text-violet-600', title: 'AI Negotiation Engine', description: 'Claude-powered negotiator engages customers in human-like price conversations — conceding strategically, anchoring high, and closing deals fast.', points: ['Value-based selling', 'Adaptive concession strategy', 'Scarcity & urgency signals'] },
-      { icon: '🛡️', color: 'bg-green-50 text-green-600', title: 'Floor Price Guard', description: 'Your minimum price is stored server-side only. The AI never sees it — making it completely immune to prompt injection and customer manipulation.', points: ['Server-side enforcement', 'HMAC-signed checkout URLs', 'Tamper-proof pricing'] },
-      { icon: '📊', color: 'bg-blue-50 text-blue-600', title: 'Real-time Analytics', description: 'Track deal rate, average discount, revenue protected, and session history. Know exactly which products negotiate best and where to tighten your floor.', points: ['Deal rate tracking', 'Avg discount analytics', 'Session replay logs'] },
-      { icon: '⚡', color: 'bg-orange-50 text-orange-600', title: 'One-click Integration', description: 'Drop a single script tag into any webpage, WooCommerce site, or Shopify theme. Works with Stripe Checkout and WooCommerce cart natively.', points: ['WooCommerce & Shopify', 'Stripe Checkout native', 'QR code & in-store mode'] },
+      { icon: 'bot', color: 'bg-violet-50 text-violet-600', title: 'AI Negotiation Engine', description: 'Claude-powered negotiator engages customers in human-like price conversations — conceding strategically, anchoring high, and closing deals fast.', points: ['Value-based selling', 'Adaptive concession strategy', 'Scarcity & urgency signals'] },
+      { icon: 'shield', color: 'bg-green-50 text-green-600', title: 'Floor Price Guard', description: 'Your minimum price is stored server-side only. The AI never sees it — making it completely immune to prompt injection and customer manipulation.', points: ['Server-side enforcement', 'HMAC-signed checkout URLs', 'Tamper-proof pricing'] },
+      { icon: 'chart', color: 'bg-blue-50 text-blue-600', title: 'Real-time Analytics', description: 'Track deal rate, average discount, revenue protected, and session history. Know exactly which products negotiate best and where to tighten your floor.', points: ['Deal rate tracking', 'Avg discount analytics', 'Session replay logs'] },
+      { icon: 'zap', color: 'bg-orange-50 text-orange-600', title: 'One-click Integration', description: 'Drop a single script tag into any webpage, WooCommerce site, or Shopify theme. Works with Stripe Checkout and WooCommerce cart natively.', points: ['WooCommerce & Shopify', 'Stripe Checkout native', 'QR code & in-store mode'] },
     ],
   },
   how_it_works: {
@@ -95,9 +95,9 @@ const DEFAULTS: SiteContent = {
     title: 'Up and running in under 10 minutes',
     subtitle: 'No AI expertise required. Set your prices, embed the widget, and watch deals flow in.',
     steps: [
-      { icon: '📦', n: '01', title: 'Add Your Products', description: 'Set a public list price and a private floor price. The floor is stored server-side — the AI never sees it.' },
-      { icon: '🔌', n: '02', title: 'Embed the Widget', description: "Drop one script tag onto your store page. Nego Bot's chat bubble appears instantly, ready to negotiate." },
-      { icon: '🤝', n: '03', title: 'Deals Close Automatically', description: 'The AI haggles with your customers, protects your margin, then redirects them to a signed checkout URL.' },
+      { icon: 'package', n: '01', title: 'Add Your Products', description: 'Set a public list price and a private floor price. The floor is stored server-side — the AI never sees it.' },
+      { icon: 'plug', n: '02', title: 'Embed the Widget', description: "Drop one script tag onto your store page. Nego Bot's chat bubble appears instantly, ready to negotiate." },
+      { icon: 'handshake', n: '03', title: 'Deals Close Automatically', description: 'The AI haggles with your customers, protects your margin, then redirects them to a signed checkout URL.' },
     ],
   },
   cta: {
@@ -106,9 +106,9 @@ const DEFAULTS: SiteContent = {
     cta_primary: 'Start Free — No Card Required',
     cta_secondary: 'Try Live Demo',
     stats: [
-      { label: '2,847 Deals Closed', icon: '🤝', color: 'text-green-400' },
-      { label: '$1.2M Revenue Protected', icon: '🛡️', color: 'text-violet-300' },
-      { label: '94% Margin Preserved', icon: '📈', color: 'text-blue-400' },
+      { label: '2,847 Deals Closed', icon: 'handshake', color: 'text-green-400' },
+      { label: '$1.2M Revenue Protected', icon: 'shield', color: 'text-violet-300' },
+      { label: '94% Margin Preserved', icon: 'trending-up', color: 'text-blue-400' },
     ],
   },
   signup: {
@@ -116,10 +116,10 @@ const DEFAULTS: SiteContent = {
     title: 'Start closing smarter deals today.',
     subtitle: 'Create your merchant account in seconds. No credit card required for your first 100 negotiations.',
     perks: [
-      { icon: '✅', text: 'Free for first 100 negotiations' },
-      { icon: '🔐', text: 'API key generated instantly' },
-      { icon: '🚀', text: 'Widget live in under 5 minutes' },
-      { icon: '📊', text: 'Full analytics dashboard included' },
+      { icon: 'check-circle', text: 'Free for first 100 negotiations' },
+      { icon: 'lock', text: 'API key generated instantly' },
+      { icon: 'rocket', text: 'Widget live in under 5 minutes' },
+      { icon: 'chart', text: 'Full analytics dashboard included' },
     ],
   },
 };

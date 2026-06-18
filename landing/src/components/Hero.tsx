@@ -1,3 +1,5 @@
+import { Check, Shield, ArrowRight, Play } from 'lucide-react';
+
 export default function Hero() {
   return (
     <section className="hero-gradient pt-32 pb-20 px-6 relative overflow-hidden">
@@ -36,17 +38,13 @@ export default function Hero() {
               className="inline-flex items-center justify-center gap-2 bg-violet-600 text-white font-semibold px-7 py-3.5 rounded-full hover:bg-violet-700 transition-all shadow-lg shadow-violet-200 hover:shadow-violet-300 hover:-translate-y-0.5"
             >
               Start Negotiating Free
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+              <ArrowRight className="w-4 h-4" />
             </a>
             <a
               href="#demo"
               className="inline-flex items-center justify-center gap-2 bg-white text-gray-700 font-semibold px-7 py-3.5 rounded-full border border-gray-200 hover:border-violet-300 hover:text-violet-600 transition-all hover:-translate-y-0.5"
             >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z"/>
-              </svg>
+              <Play className="w-4 h-4" fill="currentColor" />
               Try Live Demo
             </a>
           </div>
@@ -85,7 +83,7 @@ export default function Hero() {
             {/* Left: Deal agreed card */}
             <div className="glass rounded-2xl p-4 shadow-lg absolute left-0 sm:left-4 top-8 w-52 animate-float2">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs">✓</div>
+                <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600"><Check className="w-3.5 h-3.5" /></div>
                 <p className="text-xs font-semibold text-gray-800">Deal Closed!</p>
               </div>
               <div className="space-y-1">
@@ -103,15 +101,15 @@ export default function Hero() {
                   <span className="text-green-600 font-medium">8.9%</span>
                 </div>
               </div>
-              <div className="mt-3 bg-violet-600 text-white text-xs font-semibold text-center py-1.5 rounded-lg">
-                Checkout →
+              <div className="mt-3 bg-violet-600 text-white text-xs font-semibold flex items-center justify-center gap-1 py-1.5 rounded-lg">
+                Checkout <ArrowRight className="w-3 h-3" />
               </div>
             </div>
 
             {/* Right: Floor price guard card */}
             <div className="glass rounded-2xl p-4 shadow-lg absolute right-0 sm:right-4 top-12 w-52 animate-float3">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-6 h-6 rounded-full bg-violet-100 flex items-center justify-center text-violet-600 text-xs">🛡</div>
+                <div className="w-6 h-6 rounded-full bg-violet-100 flex items-center justify-center text-violet-600"><Shield className="w-3.5 h-3.5" /></div>
                 <p className="text-xs font-semibold text-gray-800">Floor Guard Active</p>
               </div>
               <p className="text-[11px] text-gray-500 mb-2">Customer offered $200 — floor is $280. Protected.</p>

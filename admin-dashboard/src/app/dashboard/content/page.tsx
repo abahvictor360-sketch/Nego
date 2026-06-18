@@ -2,18 +2,43 @@
 
 import { useState, useEffect } from 'react';
 import { saveContentAction } from './actions';
+import Icon, { ICON_NAMES } from '@/components/Icon';
+import { Rocket, Settings, ClipboardList, Megaphone, PenLine, Check, type LucideIcon } from 'lucide-react';
 
 const BACKEND = process.env.NEXT_PUBLIC_BACKEND_URL ?? 'http://localhost:3001';
 
 type Tab = 'hero' | 'features' | 'how_it_works' | 'cta' | 'signup';
 
-const TABS: { id: Tab; label: string; icon: string }[] = [
-  { id: 'hero', label: 'Hero', icon: '🚀' },
-  { id: 'features', label: 'Features', icon: '⚙️' },
-  { id: 'how_it_works', label: 'How It Works', icon: '📋' },
-  { id: 'cta', label: 'CTA Section', icon: '📣' },
-  { id: 'signup', label: 'Signup', icon: '✍️' },
+const TABS: { id: Tab; label: string; Icon: LucideIcon }[] = [
+  { id: 'hero', label: 'Hero', Icon: Rocket },
+  { id: 'features', label: 'Features', Icon: Settings },
+  { id: 'how_it_works', label: 'How It Works', Icon: ClipboardList },
+  { id: 'cta', label: 'CTA Section', Icon: Megaphone },
+  { id: 'signup', label: 'Signup', Icon: PenLine },
 ];
+
+function IconField({ label, value, onChange }: { label: string; value: string; onChange: (v: string) => void }) {
+  return (
+    <div>
+      <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">{label}</label>
+      <div className="flex items-center gap-2">
+        <span className="w-10 h-10 shrink-0 rounded-lg bg-violet-50 text-violet-600 flex items-center justify-center">
+          <Icon name={value} className="w-5 h-5" />
+        </span>
+        <select
+          value={ICON_NAMES.includes(value) ? value : ''}
+          onChange={e => onChange(e.target.value)}
+          className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-100 transition-all bg-white"
+        >
+          {!ICON_NAMES.includes(value) && <option value="">Select an icon…</option>}
+          {ICON_NAMES.map(n => (
+            <option key={n} value={n}>{n}</option>
+          ))}
+        </select>
+      </div>
+    </div>
+  );
+}
 
 function Field({ label, value, onChange, multiline = false }: { label: string; value: string; onChange: (v: string) => void; multiline?: boolean }) {
   return (
@@ -99,7 +124,7 @@ export default function ContentPage() {
           <p className="text-sm text-gray-500 mt-0.5">Edit text shown on your public landing page</p>
         </div>
         <div className="flex items-center gap-3">
-          {saved && <span className="text-sm text-green-600 font-medium">✓ Saved</span>}
+          {saved && <span className="text-sm text-green-600 font-medium inline-flex items-center gap-1"><Check className="w-4 h-4" /> Saved</span>}
           {error && <span className="text-sm text-red-500">{error}</span>}
           <button
             onClick={save}
@@ -121,7 +146,7 @@ export default function ContentPage() {
               tab === t.id ? 'bg-white text-violet-700 shadow-sm' : 'text-gray-500 hover:text-gray-700'
             }`}
           >
-            <span>{t.icon}</span>
+            <t.Icon className="w-4 h-4" />
             <span className="hidden sm:inline">{t.label}</span>
           </button>
         ))}
@@ -148,7 +173,7 @@ export default function ContentPage() {
             {(content.features?.items ?? []).map((item: any, i: number) => (
               <div key={i} className="space-y-3 p-4 bg-gray-50 rounded-xl">
                 <p className="text-xs font-bold text-violet-600 uppercase tracking-wide">Feature {i + 1}</p>
-                <Field label="Icon (emoji)" value={item.icon ?? ''} onChange={v => setNested('features', 'items', i, 'icon', v)} />
+                <IconField label="Icon" value={item.icon ?? ''} onChange={v => setNested('features', 'items', i, 'icon', v)} />
                 <Field label="Title" value={item.title ?? ''} onChange={v => setNested('features', 'items', i, 'title', v)} />
                 <Field label="Description" value={item.description ?? ''} onChange={v => setNested('features', 'items', i, 'description', v)} multiline />
               </div>
@@ -165,7 +190,7 @@ export default function ContentPage() {
             {(content.how_it_works?.steps ?? []).map((step: any, i: number) => (
               <div key={i} className="space-y-3 p-4 bg-gray-50 rounded-xl">
                 <p className="text-xs font-bold text-violet-600 uppercase tracking-wide">Step {i + 1}</p>
-                <Field label="Icon (emoji)" value={step.icon ?? ''} onChange={v => setNested('how_it_works', 'steps', i, 'icon', v)} />
+                <IconField label="Icon" value={step.icon ?? ''} onChange={v => setNested('how_it_works', 'steps', i, 'icon', v)} />
                 <Field label="Title" value={step.title ?? ''} onChange={v => setNested('how_it_works', 'steps', i, 'title', v)} />
                 <Field label="Description" value={step.description ?? ''} onChange={v => setNested('how_it_works', 'steps', i, 'description', v)} multiline />
               </div>
@@ -183,7 +208,7 @@ export default function ContentPage() {
             {(content.cta?.stats ?? []).map((stat: any, i: number) => (
               <div key={i} className="space-y-3 p-4 bg-gray-50 rounded-xl">
                 <p className="text-xs font-bold text-violet-600 uppercase tracking-wide">Stat {i + 1}</p>
-                <Field label="Icon (emoji)" value={stat.icon ?? ''} onChange={v => setNested('cta', 'stats', i, 'icon', v)} />
+                <IconField label="Icon" value={stat.icon ?? ''} onChange={v => setNested('cta', 'stats', i, 'icon', v)} />
                 <Field label="Label" value={stat.label ?? ''} onChange={v => setNested('cta', 'stats', i, 'label', v)} />
               </div>
             ))}
@@ -197,20 +222,10 @@ export default function ContentPage() {
             <Field label="Subtitle" value={content.signup?.subtitle ?? ''} onChange={v => set('signup', 'subtitle', v)} multiline />
             <hr className="border-gray-100" />
             {(content.signup?.perks ?? []).map((perk: any, i: number) => (
-              <div key={i} className="flex gap-3 items-center">
-                <input
-                  type="text"
-                  value={perk.icon ?? ''}
-                  onChange={e => setNested('signup', 'perks', i, 'icon', e.target.value)}
-                  className="w-14 rounded-lg border border-gray-200 px-2 py-2 text-sm text-center outline-none focus:border-violet-500"
-                  placeholder="emoji"
-                />
-                <input
-                  type="text"
-                  value={perk.text ?? ''}
-                  onChange={e => setNested('signup', 'perks', i, 'text', e.target.value)}
-                  className="flex-1 rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-100 transition-all"
-                />
+              <div key={i} className="space-y-3 p-4 bg-gray-50 rounded-xl">
+                <p className="text-xs font-bold text-violet-600 uppercase tracking-wide">Perk {i + 1}</p>
+                <IconField label="Icon" value={perk.icon ?? ''} onChange={v => setNested('signup', 'perks', i, 'icon', v)} />
+                <Field label="Text" value={perk.text ?? ''} onChange={v => setNested('signup', 'perks', i, 'text', v)} />
               </div>
             ))}
           </>

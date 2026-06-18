@@ -2,6 +2,8 @@
 
 import { useInView } from '@/hooks/useInView';
 import type { CtaContent } from '@/lib/content';
+import Icon from './Icon';
+import { ArrowRight } from 'lucide-react';
 
 export default function CTA({ content }: { content: CtaContent }) {
   const { ref, inView } = useInView();
@@ -22,7 +24,7 @@ export default function CTA({ content }: { content: CtaContent }) {
               className={`glass-dark rounded-xl px-4 py-3 flex items-center gap-2 text-sm transition-all duration-500 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
               style={{ transitionDelay: inView ? `${i * 100}ms` : '0ms' }}
             >
-              <span>{stat.icon}</span>
+              <Icon name={stat.icon} className={`w-4 h-4 ${stat.color}`} />
               <span className={`font-semibold ${stat.color}`}>{stat.label}</span>
             </div>
           ))}
@@ -37,7 +39,7 @@ export default function CTA({ content }: { content: CtaContent }) {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a href="#signup" className="inline-flex items-center justify-center gap-2 bg-violet-500 text-white font-semibold px-8 py-4 rounded-full hover:bg-violet-400 transition-all shadow-lg shadow-violet-900/50 hover:-translate-y-0.5">
             {content.cta_primary}
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+            <ArrowRight className="w-4 h-4" />
           </a>
           <a href="#demo" className="inline-flex items-center justify-center gap-2 bg-white/10 text-white font-semibold px-8 py-4 rounded-full border border-white/20 hover:bg-white/20 transition-all hover:-translate-y-0.5">
             {content.cta_secondary}

@@ -109,8 +109,8 @@ export default function NegoWidget({
               )}
             </div>
             <button onClick={() => setOpen(false)}
-              className="text-white/80 hover:text-white transition-colors text-lg leading-none">
-              ✕
+              className="text-white/80 hover:text-white transition-colors leading-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
             </button>
           </div>
 
@@ -153,7 +153,10 @@ export default function NegoWidget({
             {/* Agreed banner */}
             {widgetStatus === 'agreed' && checkoutUrl && (
               <div className="bg-green-50 border border-green-200 rounded-xl p-3 text-center">
-                <p className="text-green-700 font-semibold text-sm">🎉 Deal reached!</p>
+                <p className="text-green-700 font-semibold text-sm flex items-center justify-center gap-1.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+                  Deal reached!
+                </p>
                 <p className="text-green-600 text-xs mt-1">Redirecting to checkout in 3 seconds…</p>
                 <a href={checkoutUrl}
                   className="inline-block mt-2 text-xs text-white px-3 py-1.5 rounded-lg"
@@ -194,7 +197,11 @@ export default function NegoWidget({
         className="w-14 h-14 rounded-full shadow-lg text-white flex items-center justify-center text-2xl transition-transform hover:scale-105 active:scale-95"
         style={{ background: accentColor }}
         aria-label="Open price negotiator">
-        {open ? '✕' : '💬'}
+        {open ? (
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        ) : (
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        )}
       </button>
     </div>
   );

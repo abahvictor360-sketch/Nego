@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { useInView } from '@/hooks/useInView';
 import type { SignupContent } from '@/lib/content';
+import Icon from './Icon';
+import { Sparkles, PartyPopper, ArrowRight } from 'lucide-react';
 
 const BACKEND = process.env.NEXT_PUBLIC_BACKEND_URL ?? 'http://localhost:3001';
 
@@ -42,7 +44,7 @@ export default function Signup({ content }: { content: SignupContent }) {
       <section id="signup" className="py-24 px-6 bg-gray-50">
         <div className="max-w-lg mx-auto text-center">
           <div className="bg-white rounded-2xl border border-green-100 p-10 shadow-sm animate-slide-up">
-            <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center text-3xl mx-auto mb-4">🎉</div>
+            <div className="w-16 h-16 rounded-full bg-green-100 text-green-600 flex items-center justify-center mx-auto mb-4"><PartyPopper className="w-8 h-8" /></div>
             <h2 className="text-2xl font-bold text-gray-900 mb-2">Welcome to Nego Bot!</h2>
             <p className="text-gray-500 text-sm mb-6">Your account is ready. Save your API key — it won't be shown again.</p>
             <div className="bg-gray-900 rounded-xl p-4 text-left mb-6">
@@ -50,7 +52,7 @@ export default function Signup({ content }: { content: SignupContent }) {
               <p className="text-green-400 font-mono text-sm break-all">{apiKey}</p>
             </div>
             <a href="https://nego-admin.vercel.app" className="inline-flex items-center gap-2 bg-violet-600 text-white font-semibold px-6 py-3 rounded-full hover:bg-violet-700 transition-colors">
-              Open Dashboard →
+              Open Dashboard <ArrowRight className="w-4 h-4" />
             </a>
           </div>
         </div>
@@ -65,7 +67,7 @@ export default function Signup({ content }: { content: SignupContent }) {
         className={`max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 items-center transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
       >
         <div className="lg:w-1/2">
-          <div className="badge inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold text-violet-700 mb-4">✦ {content.badge}</div>
+          <div className="badge inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold text-violet-700 mb-4"><Sparkles className="w-3.5 h-3.5" /> {content.badge}</div>
           <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">
             {content.title.split('today')[0]}<span className="text-violet-600">today.</span>
           </h2>
@@ -77,7 +79,7 @@ export default function Signup({ content }: { content: SignupContent }) {
                 className={`flex items-center gap-3 transition-all duration-500 ${inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}
                 style={{ transitionDelay: inView ? `${i * 80 + 200}ms` : '0ms' }}
               >
-                <span className="text-lg">{item.icon}</span>
+                <span className="w-8 h-8 rounded-lg bg-violet-50 text-violet-600 flex items-center justify-center shrink-0"><Icon name={item.icon} className="w-4 h-4" /></span>
                 <span className="text-gray-700 font-medium">{item.text}</span>
               </div>
             ))}
