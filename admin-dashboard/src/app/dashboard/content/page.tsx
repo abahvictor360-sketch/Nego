@@ -37,7 +37,6 @@ function Field({ label, value, onChange, multiline = false }: { label: string; v
 }
 
 export default function ContentPage() {
-  const router = useRouter();
   const [tab, setTab] = useState<Tab>('hero');
   const [content, setContent] = useState<Record<string, any> | null>(null);
   const [saving, setSaving] = useState(false);
