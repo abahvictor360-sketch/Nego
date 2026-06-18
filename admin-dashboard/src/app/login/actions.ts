@@ -21,8 +21,11 @@ export async function loginAction(
     body: JSON.stringify({ email, password }),
   });
 
-  if (!res.ok) {
+  if (res.status === 401) {
     return { error: 'Invalid email or password.' };
+  }
+  if (!res.ok) {
+    return { error: 'Server error — the backend may be starting up. Wait 30 seconds and try again.' };
   }
 
   const merchant = await res.json() as {

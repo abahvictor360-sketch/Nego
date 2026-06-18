@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 import merchantRoutes from './routes/merchants';
 import productRoutes from './routes/products';
 import sessionRoutes from './routes/sessions';
+import contentRoutes from './routes/content';
 import { apiLimiter } from './middleware/rateLimiter';
 
 dotenv.config();
@@ -26,6 +27,7 @@ app.use('/api', apiLimiter);
 app.use('/api/merchants', merchantRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/sessions', sessionRoutes);
+app.use('/api/content', contentRoutes);
 
 // Health check
 app.get('/health', (_req: Request, res: Response) => {

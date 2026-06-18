@@ -70,3 +70,11 @@ model Message {
 
   @@map("messages")
 }
+
+model SiteContent {
+  id        String   @id @default("default")
+  content   Json     @default("{}")
+  updatedAt DateTime @updatedAt
+
+  @@map("site_content")
+}

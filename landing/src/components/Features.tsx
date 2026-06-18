@@ -1,63 +1,37 @@
-const features = [
-  {
-    icon: '🤖',
-    color: 'bg-violet-50 text-violet-600',
-    title: 'AI Negotiation Engine',
-    description:
-      'Claude-powered negotiator engages customers in human-like price conversations — conceding strategically, anchoring high, and closing deals fast.',
-    points: ['Value-based selling', 'Adaptive concession strategy', 'Scarcity & urgency signals'],
-  },
-  {
-    icon: '🛡️',
-    color: 'bg-green-50 text-green-600',
-    title: 'Floor Price Guard',
-    description:
-      'Your minimum price is stored server-side only. The AI never sees it — making it completely immune to prompt injection and customer manipulation.',
-    points: ['Server-side enforcement', 'HMAC-signed checkout URLs', 'Tamper-proof pricing'],
-  },
-  {
-    icon: '📊',
-    color: 'bg-blue-50 text-blue-600',
-    title: 'Real-time Analytics',
-    description:
-      'Track deal rate, average discount, revenue protected, and session history. Know exactly which products negotiate best and where to tighten your floor.',
-    points: ['Deal rate tracking', 'Avg discount analytics', 'Session replay logs'],
-  },
-  {
-    icon: '⚡',
-    color: 'bg-orange-50 text-orange-600',
-    title: 'One-click Integration',
-    description:
-      'Drop a single script tag into any webpage, WooCommerce site, or Shopify theme. Works with Stripe Checkout and WooCommerce cart natively.',
-    points: ['WooCommerce & Shopify', 'Stripe Checkout native', 'QR code & in-store mode'],
-  },
-];
+'use client';
 
-export default function Features() {
+import { useInView } from '@/hooks/useInView';
+import type { FeaturesContent } from '@/lib/content';
+
+export default function Features({ content }: { content: FeaturesContent }) {
+  const { ref: headerRef, inView: headerIn } = useInView();
+  const { ref: gridRef, inView: gridIn } = useInView();
+
   return (
     <section id="features" className="py-24 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-16">
+        <div
+          ref={headerRef}
+          className={`text-center mb-16 transition-all duration-700 ${headerIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+        >
           <div className="badge inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold text-violet-700 mb-4">
-            ✦ FEATURES
+            ✦ {content.badge}
           </div>
           <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-4">
-            All the tools you need to{' '}
+            {content.title.split('close more deals')[0]}
             <span className="text-violet-600">close more deals</span>
           </h2>
-          <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-            Empower your store with intelligent negotiation that converts hesitant shoppers
-            into paying customers — without sacrificing your margins.
-          </p>
+          <p className="text-lg text-gray-500 max-w-2xl mx-auto">{content.subtitle}</p>
         </div>
 
-        {/* Cards grid */}
-        <div className="grid sm:grid-cols-2 gap-6">
-          {features.map((f, i) => (
+        <div ref={gridRef} className="grid sm:grid-cols-2 gap-6">
+          {content.items.map((f, i) => (
             <div
               key={i}
-              className="feature-card rounded-2xl border border-gray-100 bg-white p-8 hover:border-violet-100 group"
+              className={`feature-card rounded-2xl border border-gray-100 bg-white p-8 hover:border-violet-100 group transition-all duration-500 ${
+                gridIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
+              style={{ transitionDelay: gridIn ? `${i * 100}ms` : '0ms' }}
             >
               <div className={`w-12 h-12 rounded-xl ${f.color} flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform`}>
                 {f.icon}
@@ -78,26 +52,14 @@ export default function Features() {
           ))}
         </div>
 
-        {/* Big feature highlight */}
-        <div className="mt-6 rounded-2xl bg-gradient-to-br from-violet-600 to-purple-700 p-8 sm:p-12 text-white flex flex-col sm:flex-row gap-8 items-center">
+        <div className={`mt-6 rounded-2xl bg-gradient-to-br from-violet-600 to-purple-700 p-8 sm:p-12 text-white flex flex-col sm:flex-row gap-8 items-center transition-all duration-700 delay-200 ${gridIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
           <div className="flex-1">
-            <div className="inline-flex items-center gap-2 bg-white/10 rounded-full px-3 py-1 text-xs font-semibold mb-4">
-              🌐 Multi-channel
-            </div>
-            <h3 className="text-2xl sm:text-3xl font-bold mb-3">
-              Web, Mobile & In-Store QR
-            </h3>
-            <p className="text-violet-100 text-sm leading-relaxed max-w-lg">
-              One negotiation bot, three channels. Embed on your website, power your mobile app,
-              or print a QR code for brick-and-mortar stores. The same AI closes deals everywhere.
-            </p>
+            <div className="inline-flex items-center gap-2 bg-white/10 rounded-full px-3 py-1 text-xs font-semibold mb-4">🌐 Multi-channel</div>
+            <h3 className="text-2xl sm:text-3xl font-bold mb-3">Web, Mobile & In-Store QR</h3>
+            <p className="text-violet-100 text-sm leading-relaxed max-w-lg">One negotiation bot, three channels. Embed on your website, power your mobile app, or print a QR code for brick-and-mortar stores.</p>
           </div>
           <div className="flex gap-3 sm:gap-4">
-            {[
-              { label: 'Web', icon: '🌐' },
-              { label: 'Mobile', icon: '📱' },
-              { label: 'In-Store QR', icon: '📲' },
-            ].map(ch => (
+            {[{ label: 'Web', icon: '🌐' }, { label: 'Mobile', icon: '📱' }, { label: 'In-Store QR', icon: '📲' }].map(ch => (
               <div key={ch.label} className="glass-dark rounded-2xl p-4 text-center min-w-[80px]">
                 <div className="text-2xl mb-1">{ch.icon}</div>
                 <p className="text-xs font-medium text-white/80">{ch.label}</p>

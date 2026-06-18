@@ -7,6 +7,7 @@ const navItems = [
   { href: '/dashboard', label: 'Analytics', icon: '📊' },
   { href: '/dashboard/products', label: 'Products', icon: '📦' },
   { href: '/dashboard/sessions', label: 'Sessions', icon: '💬' },
+  { href: '/dashboard/content', label: 'Landing Page', icon: '✏️' },
 ];
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
