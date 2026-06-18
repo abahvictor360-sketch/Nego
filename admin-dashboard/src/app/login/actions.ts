@@ -13,18 +13,29 @@ export async function loginAction(
 
   if (!email || !password) return { error: 'Email and password are required.' };
 
-  const backendUrl = process.env.BACKEND_API_URL ?? 'http://localhost:3001';
-  const res = await fetch(`${backendUrl}/api/merchants/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password }),
-  });
+  const backendUrl = process.env.BACKEND_API_URL ?? '';
+  if (!backendUrl) {
+    return { error: 'Backend URL not configured. Set BACKEND_API_URL in Vercel environment variables.' };
+  }
+
+  let res: Response;
+  try {
+    res = await fetch(`${backendUrl}/api/merchants/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : String(err);
+    return { error: `Cannot reach backend (${backendUrl}): ${msg}` };
+  }
 
   if (res.status === 401) {
     return { error: 'Invalid email or password.' };
   }
   if (!res.ok) {
-    return { error: 'Server error — the backend may be starting up. Wait 30 seconds and try again.' };
+    const body = await res.text().catch(() => '');
+    return { error: `Backend error ${res.status}: ${body || res.statusText}` };
   }
 
   const merchant = await res.json() as {
