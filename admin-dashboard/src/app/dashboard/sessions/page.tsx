@@ -1,6 +1,9 @@
 import { getSession } from '@/lib/session';
 import { api, type Session } from '@/lib/api';
 import Link from 'next/link';
+import PageHeader from '@/components/PageHeader';
+import EmptyState from '@/components/EmptyState';
+import { MessageSquare } from 'lucide-react';
 
 const STATUS_COLORS: Record<string, string> = {
   agreed: 'bg-green-100 text-green-700',
@@ -26,7 +29,7 @@ export default async function SessionsPage({ searchParams }: Props) {
 
   return (
     <div className="max-w-5xl">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Sessions</h1>
+      <PageHeader title="Sessions" subtitle="Every negotiation conversation and its outcome" />
 
       {/* Filter tabs */}
       <div className="flex gap-2 mb-4 flex-wrap">
@@ -50,7 +53,11 @@ export default async function SessionsPage({ searchParams }: Props) {
 
       <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
         {filtered.length === 0 ? (
-          <p className="text-center text-gray-400 text-sm py-12">No sessions found.</p>
+          <EmptyState
+            Icon={MessageSquare}
+            title="No sessions found"
+            description="Negotiation sessions from your widget will show up here as customers engage."
+          />
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">

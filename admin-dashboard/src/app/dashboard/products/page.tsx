@@ -1,6 +1,7 @@
 import { getSession } from '@/lib/session';
 import { api, type Product } from '@/lib/api';
 import ProductsClient from './ProductsClient';
+import PageHeader from '@/components/PageHeader';
 
 export default async function ProductsPage() {
   const session = await getSession();
@@ -8,9 +9,7 @@ export default async function ProductsPage() {
 
   return (
     <div className="max-w-5xl">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Products</h1>
-      </div>
+      <PageHeader title="Products" subtitle="Set list and floor prices for items customers can negotiate" />
       <ProductsClient initialProducts={products} apiKey={session!.apiKey} />
     </div>
   );

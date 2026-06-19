@@ -1,8 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Copy, Check } from 'lucide-react';
+import { Copy, Check, Package } from 'lucide-react';
 import type { Product } from '@/lib/api';
+import EmptyState from '@/components/EmptyState';
 
 function CopyId({ id }: { id: string }) {
   const [copied, setCopied] = useState(false);
@@ -158,7 +159,19 @@ export default function ProductsClient({ initialProducts, apiKey }: Props) {
 
       <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
         {products.length === 0 ? (
-          <p className="text-center text-gray-400 text-sm py-12">No products yet. Add one above.</p>
+          <EmptyState
+            Icon={Package}
+            title="No products yet"
+            description="Add your first product with a list price and a hidden floor price to start negotiating."
+            action={
+              <button
+                onClick={openNew}
+                className="rounded-lg bg-violet-600 px-4 py-2 text-sm font-semibold text-white hover:bg-violet-700 transition-colors"
+              >
+                + Add Product
+              </button>
+            }
+          />
         ) : (
           <table className="w-full text-sm">
             <thead className="bg-gray-50 text-gray-500 text-xs uppercase tracking-wide">
