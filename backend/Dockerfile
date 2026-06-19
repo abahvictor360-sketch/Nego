@@ -29,6 +29,7 @@ COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 COPY prisma ./prisma/
 COPY scripts ./scripts/
+COPY public ./public/
 
 EXPOSE 3001
 

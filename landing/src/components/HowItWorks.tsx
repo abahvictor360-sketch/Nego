@@ -57,12 +57,13 @@ export default function HowItWorks({ content }: { content: HowItWorksContent }) 
             <div className="w-3 h-3 rounded-full bg-red-500" /><div className="w-3 h-3 rounded-full bg-yellow-500" /><div className="w-3 h-3 rounded-full bg-green-500" />
             <span className="ml-2 text-xs text-gray-500 font-mono">embed.html</span>
           </div>
-          <pre className="text-sm text-gray-300 font-mono leading-relaxed whitespace-pre-wrap">{`<div
+          <pre className="text-sm text-gray-300 font-mono leading-relaxed whitespace-pre-wrap">{`<link rel="stylesheet" href="https://nego-5ykj.onrender.com/nego-widget.css" />
+<div
   data-nego-product="<your-product-id>"
   data-nego-api-key="<your-api-key>"
   data-nego-api-url="https://nego-5ykj.onrender.com"
 ></div>
-<script src="https://cdn.negotiobot.com/nego-widget.umd.js"></script>`}</pre>
+<script src="https://nego-5ykj.onrender.com/nego-widget.umd.js"></script>`}</pre>
           <p className="text-xs text-gray-500 mt-3">That's it. The widget mounts itself and starts negotiating.</p>
         </div>
       </div>
