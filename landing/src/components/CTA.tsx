@@ -41,7 +41,7 @@ export default function CTA({ content }: { content: CtaContent }) {
             {content.cta_primary}
             <ArrowRight className="w-4 h-4" />
           </a>
-          <a href="#demo" className="inline-flex items-center justify-center gap-2 bg-white/10 text-white font-semibold px-8 py-4 rounded-full border border-white/20 hover:bg-white/20 transition-all hover:-translate-y-0.5">
+          <a href="/demo" className="inline-flex items-center justify-center gap-2 bg-white/10 text-white font-semibold px-8 py-4 rounded-full border border-white/20 hover:bg-white/20 transition-all hover:-translate-y-0.5">
             {content.cta_secondary}
           </a>
         </div>

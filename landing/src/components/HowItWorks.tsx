@@ -66,6 +66,13 @@ export default function HowItWorks({ content }: { content: HowItWorksContent }) 
 <script src="https://nego-5ykj.onrender.com/nego-widget.umd.js"></script>`}</pre>
           <p className="text-xs text-gray-500 mt-3">That's it. The widget mounts itself and starts negotiating.</p>
         </div>
+
+        <div className="text-center mt-10">
+          <a href="/how-it-works" className="inline-flex items-center gap-2 text-violet-600 font-semibold hover:text-violet-700 transition-colors">
+            See the full guide &amp; FAQ
+            <ChevronRight className="w-4 h-4" />
+          </a>
+        </div>
       </div>
     </section>
   );

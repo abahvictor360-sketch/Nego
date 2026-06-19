@@ -6,8 +6,8 @@ import { MessageCircle, X, Menu } from 'lucide-react';
 
 const links = [
   { label: 'Features', href: '/#features' },
-  { label: 'How It Works', href: '/#how-it-works' },
-  { label: 'Live Demo', href: '/#demo' },
+  { label: 'How It Works', href: '/how-it-works' },
+  { label: 'Live Demo', href: '/demo' },
   { label: 'Pricing', href: '/pricing' },
 ];
 

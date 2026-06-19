@@ -47,7 +47,7 @@ export default function Hero({ content }: { content: HeroContent }) {
               <ArrowRight className="w-4 h-4" />
             </a>
             <a
-              href="#demo"
+              href="/demo"
               className="inline-flex items-center justify-center gap-2 bg-white text-gray-700 font-semibold px-7 py-3.5 rounded-full border border-gray-200 hover:border-violet-300 hover:text-violet-600 transition-all hover:-translate-y-0.5"
             >
               <Play className="w-4 h-4" fill="currentColor" />
