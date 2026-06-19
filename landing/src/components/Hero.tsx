@@ -40,7 +40,7 @@ export default function Hero({ content }: { content: HeroContent }) {
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-3 mb-16">
             <a
-              href="#signup"
+              href="https://nego-admin.vercel.app/signup"
               className="inline-flex items-center justify-center gap-2 bg-violet-600 text-white font-semibold px-7 py-3.5 rounded-full hover:bg-violet-700 transition-all shadow-lg shadow-violet-200 hover:shadow-violet-300 hover:-translate-y-0.5"
             >
               {content.cta_primary}

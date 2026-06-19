@@ -7,7 +7,7 @@ const plans = [
     period: '/ month',
     desc: 'Perfect for small merchants testing the waters.',
     cta: 'Get Started Free',
-    ctaHref: '#signup',
+    ctaHref: 'https://nego-admin.vercel.app/signup',
     highlight: false,
     features: [
       '100 negotiations / month',
@@ -23,7 +23,7 @@ const plans = [
     period: '/ month',
     desc: 'For growing stores that want maximum deal velocity.',
     cta: 'Start 14-day Trial',
-    ctaHref: '#signup',
+    ctaHref: 'https://nego-admin.vercel.app/signup',
     highlight: true,
     badge: 'Most Popular',
     features: [

@@ -3,9 +3,11 @@
 import { useState, useRef, useEffect } from 'react';
 import { Sparkles, ArrowRight, MessageCircle, PartyPopper } from 'lucide-react';
 
-const BACKEND = process.env.NEXT_PUBLIC_BACKEND_URL ?? 'http://localhost:3001';
-const DEMO_API_KEY = process.env.NEXT_PUBLIC_DEMO_API_KEY ?? '';
-const DEMO_PRODUCT_ID = process.env.NEXT_PUBLIC_DEMO_PRODUCT_ID ?? '';
+// Fall back to the live demo merchant/product so the demo works out of the box.
+// These are intentionally public demo credentials (read-only negotiation flow).
+const BACKEND = process.env.NEXT_PUBLIC_BACKEND_URL ?? 'https://nego-5ykj.onrender.com';
+const DEMO_API_KEY = process.env.NEXT_PUBLIC_DEMO_API_KEY ?? 'demo-api-key-3ef9190674d01e3a';
+const DEMO_PRODUCT_ID = process.env.NEXT_PUBLIC_DEMO_PRODUCT_ID ?? 'cuid_demo_product_01';
 
 interface Message { role: 'user' | 'assistant'; text: string; }
 type Status = 'idle' | 'open' | 'countering' | 'agreed' | 'rejected' | 'error';
@@ -17,6 +19,7 @@ export default function Demo() {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [checkoutUrl, setCheckoutUrl] = useState<string | null>(null);
+  const [product, setProduct] = useState<{ name: string; price: string }>({ name: 'Premium Widget', price: '100.00' });
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -42,10 +45,12 @@ export default function Demo() {
       });
       const data = await res.json();
       setSessionId(data.id);
-      const price = parseFloat(data.product?.listPrice ?? '349').toFixed(2);
+      const price = parseFloat(data.product?.listPrice ?? '100').toFixed(2);
+      const name = data.product?.name ?? 'Premium Widget';
+      setProduct({ name, price });
       setMessages([{
         role: 'assistant',
-        text: `Hi! I'm Max. The ${data.product?.name ?? 'Sony WH-1000XM5'} is listed at $${price}. Make me an offer and let's see if we can strike a deal!`,
+        text: `Hi! I'm Max. The ${name} is listed at $${price}. Make me an offer and let's see if we can strike a deal!`,
       }]);
     } catch {
       setMessages([{ role: 'assistant', text: "Hi! I'm Max. Unfortunately I can't connect to the demo backend right now. Sign up to try for real!" }]);
@@ -145,7 +150,7 @@ export default function Demo() {
                     <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-sm font-bold">M</div>
                     <div>
                       <p className="text-sm font-semibold">Max · Nego Bot</p>
-                      <p className="text-[11px] text-violet-200">Sony WH-1000XM5 · $349.00</p>
+                      <p className="text-[11px] text-violet-200">{product.name} · ${product.price}</p>
                     </div>
                     <div className="ml-auto">
                       <span className="w-2 h-2 rounded-full bg-green-400 inline-block" />

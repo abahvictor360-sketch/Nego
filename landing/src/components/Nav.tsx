@@ -58,7 +58,7 @@ export default function Nav() {
             Login
           </Link>
           <Link
-            href="/#signup"
+            href="https://nego-admin.vercel.app/signup"
             className="text-sm font-semibold bg-violet-600 text-white px-4 py-2 rounded-full hover:bg-violet-700 transition-colors shadow-sm shadow-violet-200"
           >
             Get Started Free
@@ -87,7 +87,7 @@ export default function Nav() {
             </Link>
           ))}
           <Link
-            href="/#signup"
+            href="https://nego-admin.vercel.app/signup"
             onClick={() => setMenuOpen(false)}
             className="block text-center text-sm font-semibold bg-violet-600 text-white px-4 py-2.5 rounded-full mt-2"
           >

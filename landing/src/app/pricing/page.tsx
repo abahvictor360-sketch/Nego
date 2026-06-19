@@ -68,7 +68,7 @@ export default function PricingPage() {
           <h2 className="text-3xl font-bold text-white mb-4">Ready to start closing smarter deals?</h2>
           <p className="text-violet-100 mb-8">Join for free — no credit card required.</p>
           <Link
-            href="/#signup"
+            href="https://nego-admin.vercel.app/signup"
             className="inline-flex items-center gap-2 bg-white text-violet-600 font-semibold px-8 py-4 rounded-full hover:bg-violet-50 transition-colors shadow-lg"
           >
             Get Started Free <ArrowRight className="w-4 h-4" />

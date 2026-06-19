@@ -37,7 +37,7 @@ export default function CTA({ content }: { content: CtaContent }) {
         <p className="text-lg text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">{content.subtitle}</p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#signup" className="inline-flex items-center justify-center gap-2 bg-violet-500 text-white font-semibold px-8 py-4 rounded-full hover:bg-violet-400 transition-all shadow-lg shadow-violet-900/50 hover:-translate-y-0.5">
+          <a href="https://nego-admin.vercel.app/signup" className="inline-flex items-center justify-center gap-2 bg-violet-500 text-white font-semibold px-8 py-4 rounded-full hover:bg-violet-400 transition-all shadow-lg shadow-violet-900/50 hover:-translate-y-0.5">
             {content.cta_primary}
             <ArrowRight className="w-4 h-4" />
           </a>
