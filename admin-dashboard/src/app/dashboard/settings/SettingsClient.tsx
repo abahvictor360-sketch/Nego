@@ -3,6 +3,7 @@
 import { useActionState, useState } from 'react';
 import { changePasswordAction } from './actions';
 import { Copy, Check, KeyRound, Lock } from 'lucide-react';
+import InstallApp from '@/components/InstallApp';
 
 function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
@@ -48,6 +49,9 @@ export default function SettingsClient({ name, email, apiKey, widgetBaseUrl }: P
           ))}
         </div>
       </section>
+
+      {/* Install as PWA */}
+      <InstallApp />
 
       {/* API Key */}
       <section className="bg-white rounded-2xl border border-gray-200 p-6 space-y-3">
