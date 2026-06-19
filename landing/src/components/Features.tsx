@@ -3,7 +3,7 @@
 import { useInView } from '@/hooks/useInView';
 import type { FeaturesContent } from '@/lib/content';
 import Icon from './Icon';
-import { Sparkles, Globe, Smartphone, QrCode } from 'lucide-react';
+import { Sparkles, Globe, Smartphone, QrCode, Check } from 'lucide-react';
 
 export default function Features({ content }: { content: FeaturesContent }) {
   const { ref: headerRef, inView: headerIn } = useInView();
@@ -43,9 +43,7 @@ export default function Features({ content }: { content: FeaturesContent }) {
               <ul className="space-y-2">
                 {f.points.map(p => (
                   <li key={p} className="flex items-center gap-2 text-sm text-gray-600">
-                    <svg className="w-4 h-4 text-violet-500 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
+                    <Check className="w-4 h-4 text-violet-500 shrink-0" />
                     {p}
                   </li>
                 ))}

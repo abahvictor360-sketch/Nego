@@ -3,7 +3,7 @@
 import { useInView } from '@/hooks/useInView';
 import type { HowItWorksContent } from '@/lib/content';
 import Icon from './Icon';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, ChevronRight } from 'lucide-react';
 
 export default function HowItWorks({ content }: { content: HowItWorksContent }) {
   const { ref: headerRef, inView: headerIn } = useInView();
@@ -45,9 +45,7 @@ export default function HowItWorks({ content }: { content: HowItWorksContent }) 
               </div>
               {i < content.steps.length - 1 && (
                 <div className="hidden md:flex items-center px-2">
-                  <svg className="w-6 h-6 text-violet-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
-                  </svg>
+                  <ChevronRight className="w-6 h-6 text-violet-300" />
                 </div>
               )}
             </div>

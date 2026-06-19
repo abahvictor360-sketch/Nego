@@ -1,4 +1,4 @@
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Check } from 'lucide-react';
 
 const plans = [
   {
@@ -107,9 +107,7 @@ export default function Pricing() {
               <ul className="space-y-3 flex-1 mb-8">
                 {plan.features.map(f => (
                   <li key={f} className={`flex items-center gap-2.5 text-sm ${plan.highlight ? 'text-violet-100' : 'text-gray-600'}`}>
-                    <svg className={`w-4 h-4 shrink-0 ${plan.highlight ? 'text-violet-200' : 'text-violet-500'}`} fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
+                    <Check className={`w-4 h-4 shrink-0 ${plan.highlight ? 'text-violet-200' : 'text-violet-500'}`} />
                     {f}
                   </li>
                 ))}
