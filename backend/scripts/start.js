@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 'use strict';
 
-// Patch DATABASE_URL before prisma migrate deploy or dist/index.js runs.
-// Supabase transaction pooler (port 6543) requires username "postgres.<ref>".
+// Patch DATABASE_URL before dist/index.js loads (which imports Prisma).
+// db-patch.ts also runs inside dist/index.js as the very first import,
+// so this is a belt-and-suspenders redundancy.
 const raw = process.env.DATABASE_URL || '';
 if (raw.includes('pooler.supabase.com') && !raw.includes('tamcebxiwxaiwaglmcqc')) {
   let url = raw.replace(
@@ -13,22 +14,8 @@ if (raw.includes('pooler.supabase.com') && !raw.includes('tamcebxiwxaiwaglmcqc')
     url += (url.includes('?') ? '&' : '?') + 'pgbouncer=true';
   }
   process.env.DATABASE_URL = url;
-  console.log('[start] patched DATABASE_URL: added project ref + pgbouncer');
+  process.stderr.write('[start] DATABASE_URL patched\n');
 }
 
-const { execSync } = require('child_process');
-
-console.log('[start] running prisma migrate deploy...');
-try {
-  execSync('npx prisma migrate deploy', {
-    stdio: 'inherit',
-    env: process.env,
-    cwd: __dirname + '/..',
-  });
-  console.log('[start] migrations OK');
-} catch (e) {
-  console.error('[start] migrate failed (continuing anyway):', e.message);
-}
-
-console.log('[start] starting server...');
+process.stderr.write('[start] loading server...\n');
 require('../dist/index.js');
