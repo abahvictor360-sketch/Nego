@@ -28,7 +28,8 @@ COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 COPY prisma ./prisma/
+COPY scripts ./scripts/
 
 EXPOSE 3001
 
-CMD ["node", "dist/index.js"]
+CMD ["node", "scripts/start.js"]
