@@ -1,6 +1,12 @@
 import { Check, Shield, ArrowRight, Play } from 'lucide-react';
+import type { HeroContent } from '@/lib/content';
 
-export default function Hero() {
+export default function Hero({ content }: { content: HeroContent }) {
+  // Split headline into main + highlighted last sentence for gradient styling
+  const parts = content.headline.split(/(?<=\.)\s+/);
+  const main = parts.length > 1 ? parts.slice(0, -1).join(' ') : content.headline;
+  const highlight = parts.length > 1 ? parts[parts.length - 1] : '';
+
   return (
     <section className="hero-gradient pt-32 pb-20 px-6 relative overflow-hidden">
       {/* Radial glow blobs */}
@@ -14,21 +20,21 @@ export default function Hero() {
           {/* Announcement badge */}
           <div className="badge inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium text-violet-700 mb-6">
             <span className="w-2 h-2 rounded-full bg-violet-500 animate-pulse" />
-            Now in Beta — 25% off for early merchants
+            {content.badge}
           </div>
 
           {/* Headline */}
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-gray-900 leading-[1.08] mb-6">
-            Let Customers Haggle.{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-purple-500">
-              You Always Win.
-            </span>
+            {main}{' '}
+            {highlight && (
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-purple-500">
+                {highlight}
+              </span>
+            )}
           </h1>
 
           <p className="text-lg sm:text-xl text-gray-500 max-w-2xl leading-relaxed mb-10">
-            Nego Bot is an AI negotiation engine that engages shoppers in real-time price
-            conversations — and never drops below your floor price. More deals, better margins,
-            zero manual effort.
+            {content.subheadline}
           </p>
 
           {/* CTAs */}
@@ -37,7 +43,7 @@ export default function Hero() {
               href="#signup"
               className="inline-flex items-center justify-center gap-2 bg-violet-600 text-white font-semibold px-7 py-3.5 rounded-full hover:bg-violet-700 transition-all shadow-lg shadow-violet-200 hover:shadow-violet-300 hover:-translate-y-0.5"
             >
-              Start Negotiating Free
+              {content.cta_primary}
               <ArrowRight className="w-4 h-4" />
             </a>
             <a
@@ -45,7 +51,7 @@ export default function Hero() {
               className="inline-flex items-center justify-center gap-2 bg-white text-gray-700 font-semibold px-7 py-3.5 rounded-full border border-gray-200 hover:border-violet-300 hover:text-violet-600 transition-all hover:-translate-y-0.5"
             >
               <Play className="w-4 h-4" fill="currentColor" />
-              Try Live Demo
+              {content.cta_secondary}
             </a>
           </div>
 
