@@ -199,6 +199,7 @@ export async function listSessions(req: AuthenticatedRequest, res: Response): Pr
     select: {
       id: true, productId: true, channel: true, status: true,
       startedAt: true, endedAt: true, finalAgreedPrice: true, discountPercent: true,
+      customerIdentifier: true,
       product: { select: { name: true, listPrice: true, currency: true } },
     },
   });

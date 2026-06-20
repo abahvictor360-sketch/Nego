@@ -38,6 +38,7 @@ export interface Session {
   finalAgreedPrice: string | null;
   discountPercent: string | null;
   checkoutUrl?: string | null;
+  customerIdentifier?: string | null;
   product: { name: string; listPrice: string; currency: string };
 }
 
