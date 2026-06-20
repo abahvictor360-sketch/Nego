@@ -28,7 +28,7 @@ export default function EmailSettingsClient({ initial }: { initial: EmailSetting
   const [pending, startTransition] = useTransition();
 
   function field<K extends keyof EmailSettings>(key: K, value: EmailSettings[K]) {
-    setS(prev => ({ ...prev, [key]: value }));
+    setS(prev => ({ ...prev, [key]: value }) as EmailSettings);
   }
 
   function save() {

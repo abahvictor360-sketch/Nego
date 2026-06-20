@@ -4,7 +4,7 @@ import { getSession } from '@/lib/session';
 
 const BACKEND = process.env.BACKEND_API_URL ?? 'http://localhost:3001';
 
-async function authedFetch(path: string, method: string, body: Record<string, unknown>) {
+async function authedFetch(path: string, method: string, body: Record<string, unknown>): Promise<{ error?: string; data?: any }> {
   const session = await getSession();
   if (!session) return { error: 'Not authenticated' };
   const res = await fetch(`${BACKEND}${path}`, {
@@ -19,12 +19,12 @@ async function authedFetch(path: string, method: string, body: Record<string, un
   return { data: await res.json() };
 }
 
-export async function createTicketAction(subject: string, message: string, priority: 'low' | 'normal' | 'high') {
+export async function createTicketAction(subject: string, message: string, priority: 'low' | 'normal' | 'high'): Promise<{ error?: string; data?: any }> {
   if (!subject.trim() || !message.trim()) return { error: 'Subject and message are required.' };
   return authedFetch('/api/tickets', 'POST', { subject, message, priority });
 }
 
-export async function replyTicketAction(id: string, body: string) {
+export async function replyTicketAction(id: string, body: string): Promise<{ error?: string; data?: any }> {
   if (!body.trim()) return { error: 'Message is required.' };
   return authedFetch(`/api/tickets/${id}/reply`, 'POST', { body });
 }

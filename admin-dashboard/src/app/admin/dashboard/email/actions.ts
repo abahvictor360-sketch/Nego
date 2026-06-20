@@ -4,7 +4,7 @@ import { getSession } from '@/lib/session';
 
 const BACKEND = process.env.BACKEND_API_URL ?? 'http://localhost:3001';
 
-async function authed(method: string, path: string, body?: Record<string, unknown>) {
+async function authed(method: string, path: string, body?: Record<string, unknown>): Promise<{ error?: string; data?: any }> {
   const session = await getSession();
   if (!session || session.role !== 'admin') return { error: 'Not authorized' };
   const res = await fetch(`${BACKEND}${path}`, {

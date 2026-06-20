@@ -4,7 +4,7 @@ import { getSession } from '@/lib/session';
 
 const BACKEND = process.env.BACKEND_API_URL ?? 'http://localhost:3001';
 
-async function adminPost(path: string, body: Record<string, string>) {
+async function adminPost(path: string, body: Record<string, string>): Promise<{ error?: string; data?: any }> {
   const session = await getSession();
   if (!session || session.role !== 'admin') return { error: 'Not authorized' };
   const res = await fetch(`${BACKEND}${path}`, {
@@ -19,7 +19,7 @@ async function adminPost(path: string, body: Record<string, string>) {
   return { data: await res.json() };
 }
 
-async function adminPatch(path: string, body: Record<string, string>) {
+async function adminPatch(path: string, body: Record<string, string>): Promise<{ error?: string; data?: any }> {
   const session = await getSession();
   if (!session || session.role !== 'admin') return { error: 'Not authorized' };
   const res = await fetch(`${BACKEND}${path}`, {

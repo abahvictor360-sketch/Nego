@@ -1,5 +1,6 @@
 import { Response } from 'express';
 import { z } from 'zod';
+import { Prisma } from '@prisma/client';
 import { prisma } from '../lib/prisma';
 import { AuthenticatedRequest } from '../middleware/apiKeyAuth';
 import { getEmailConfig, sendEmail } from '../lib/email';
@@ -47,11 +48,12 @@ export async function updateEmailSettings(req: AuthenticatedRequest, res: Respon
   };
 
   const row = await prisma.platformSetting.findUnique({ where: { id: 'default' } });
-  const data = (row?.data as Record<string, unknown>) ?? {};
+  const existingData = (row?.data as Record<string, unknown>) ?? {};
+  const nextData = { ...existingData, email: merged } as unknown as Prisma.InputJsonValue;
   await prisma.platformSetting.upsert({
     where: { id: 'default' },
-    create: { id: 'default', data: { ...data, email: merged } },
-    update: { data: { ...data, email: merged } },
+    create: { id: 'default', data: nextData },
+    update: { data: nextData },
   });
 
   const { pass, resendApiKey, ...safe } = merged;
