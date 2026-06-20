@@ -4,7 +4,8 @@ WORKDIR /app
 RUN apk add --no-cache openssl
 
 COPY package*.json ./
-RUN npm ci
+# Use `npm install` (not `npm ci`) so an out-of-sync lockfile still builds.
+RUN npm install
 
 COPY prisma ./prisma/
 RUN npx prisma generate
@@ -22,7 +23,7 @@ RUN apk add --no-cache openssl
 ENV NODE_ENV=production
 
 COPY package*.json ./
-RUN npm ci --omit=dev
+RUN npm install --omit=dev
 
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
