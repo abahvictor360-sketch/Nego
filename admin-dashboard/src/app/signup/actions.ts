@@ -46,6 +46,7 @@ export async function registerAction(
 
   const merchant = await res.json() as {
     id: string; name: string; email: string; apiKey: string;
+    role?: string; botName?: string; language?: string;
   };
 
   const token = await signSession({
@@ -53,6 +54,9 @@ export async function registerAction(
     name: merchant.name,
     email: merchant.email,
     apiKey: merchant.apiKey,
+    role: merchant.role ?? 'merchant',
+    botName: merchant.botName ?? 'Max',
+    language: merchant.language ?? 'en',
   });
 
   const store = await cookies();
