@@ -81,7 +81,11 @@ export async function sendMessage(req: AuthenticatedRequest, res: Response): Pro
   await prisma.message.create({ data: { sessionId, role: 'user', content: message } });
 
   // Build conversation history for Anthropic
-  const systemPrompt = buildSystemPrompt(session.product);
+  const systemPrompt = buildSystemPrompt(
+    session.product,
+    req.merchant!.botName,
+    req.merchant!.language,
+  );
   const history = session.messages.map(m => ({
     role: m.role as 'user' | 'assistant',
     content: m.content,

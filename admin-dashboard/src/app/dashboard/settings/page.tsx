@@ -10,6 +10,8 @@ export default async function SettingsPage() {
       name={session!.name}
       email={session!.email}
       apiKey={session!.apiKey}
+      botName={session!.botName ?? 'Max'}
+      language={session!.language ?? 'en'}
       widgetBaseUrl={BACKEND_URL}
     />
   );

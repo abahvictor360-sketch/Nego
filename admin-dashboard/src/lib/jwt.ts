@@ -9,6 +9,9 @@ export interface SessionData {
   name: string;
   email: string;
   apiKey: string;
+  role: string;
+  botName: string;
+  language: string;
 }
 
 export async function signSession(data: SessionData): Promise<string> {

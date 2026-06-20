@@ -42,7 +42,7 @@ export default async function SessionsPage({ searchParams }: Props) {
               className={`px-3 py-1.5 rounded-full text-xs font-medium capitalize transition-colors ${
                 active
                   ? 'bg-violet-600 text-white'
-                  : 'bg-white border border-gray-200 text-gray-600 hover:border-violet-300'
+                  : 'bg-white border border-gray-200 text-gray-600 hover:border-violet-300 dark:bg-gray-900 dark:border-gray-800 dark:text-gray-300 dark:hover:border-violet-500'
               }`}
             >
               {s} {s === 'all' ? `(${all.length})` : `(${all.filter(x => x.status === s).length})`}
@@ -51,7 +51,7 @@ export default async function SessionsPage({ searchParams }: Props) {
         })}
       </div>
 
-      <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+      <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden">
         {filtered.length === 0 ? (
           <EmptyState
             Icon={MessageSquare}
@@ -61,14 +61,14 @@ export default async function SessionsPage({ searchParams }: Props) {
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="bg-gray-50 text-gray-500 text-xs uppercase tracking-wide">
+              <thead className="bg-gray-50 dark:bg-gray-800/50 text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wide">
                 <tr>
                   {['Session ID', 'Product', 'Channel', 'Status', 'Started', 'Duration', 'Final Price', 'Discount'].map(h => (
                     <th key={h} className="px-4 py-3 text-left font-medium whitespace-nowrap">{h}</th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
                 {filtered.map(s => {
                   const durationMs = s.endedAt
                     ? new Date(s.endedAt).getTime() - new Date(s.startedAt).getTime()
@@ -80,28 +80,28 @@ export default async function SessionsPage({ searchParams }: Props) {
                     : '—';
 
                   return (
-                    <tr key={s.id} className="hover:bg-gray-50 cursor-pointer">
-                      <td className="px-4 py-3 font-mono text-gray-400 text-xs">
-                        <Link href={`/dashboard/sessions/${s.id}`} className="hover:text-violet-600 transition-colors">
+                    <tr key={s.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/40 cursor-pointer">
+                      <td className="px-4 py-3 font-mono text-gray-400 dark:text-gray-500 text-xs">
+                        <Link href={`/dashboard/sessions/${s.id}`} className="hover:text-violet-600 dark:hover:text-violet-400 transition-colors">
                           {s.id.slice(-8)}
                         </Link>
                       </td>
-                      <td className="px-4 py-3 font-medium text-gray-800 max-w-[160px] truncate">
-                        <Link href={`/dashboard/sessions/${s.id}`} className="hover:text-violet-600 transition-colors block">
+                      <td className="px-4 py-3 font-medium text-gray-800 dark:text-gray-200 max-w-[160px] truncate">
+                        <Link href={`/dashboard/sessions/${s.id}`} className="hover:text-violet-600 dark:hover:text-violet-400 transition-colors block">
                           {s.product.name}
                         </Link>
                       </td>
-                      <td className="px-4 py-3 text-gray-500 capitalize">{s.channel}</td>
+                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400 capitalize">{s.channel}</td>
                       <td className="px-4 py-3">
                         <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${STATUS_COLORS[s.status] ?? 'bg-gray-100 text-gray-600'}`}>
                           {s.status}
                         </span>
                       </td>
-                      <td className="px-4 py-3 text-gray-500 whitespace-nowrap">
+                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400 whitespace-nowrap">
                         {new Date(s.startedAt).toLocaleDateString()} {new Date(s.startedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                       </td>
-                      <td className="px-4 py-3 text-gray-500">{duration}</td>
-                      <td className="px-4 py-3 text-gray-800">
+                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400">{duration}</td>
+                      <td className="px-4 py-3 text-gray-800 dark:text-gray-200">
                         {s.finalAgreedPrice
                           ? `${s.product.currency} ${parseFloat(s.finalAgreedPrice).toFixed(2)}`
                           : '—'}

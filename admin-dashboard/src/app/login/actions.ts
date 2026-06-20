@@ -33,6 +33,10 @@ export async function loginAction(
   if (res.status === 401) {
     return { error: 'Invalid email or password.' };
   }
+  if (res.status === 403) {
+    const data = await res.json().catch(() => ({}));
+    return { error: data.error ?? 'Your account has been suspended. Please contact support.' };
+  }
   if (!res.ok) {
     const body = await res.text().catch(() => '');
     return { error: `Backend error ${res.status}: ${body || res.statusText}` };
@@ -40,13 +44,22 @@ export async function loginAction(
 
   const merchant = await res.json() as {
     id: string; name: string; email: string; apiKey: string;
+    role: string; botName: string; language: string;
   };
+
+  // Merchant login only — admins must use /admin/login
+  if (merchant.role === 'admin') {
+    return { error: 'Please use the admin login page.' };
+  }
 
   const token = await signSession({
     merchantId: merchant.id,
     name: merchant.name,
     email: merchant.email,
     apiKey: merchant.apiKey,
+    role: merchant.role,
+    botName: merchant.botName,
+    language: merchant.language,
   });
 
   const store = await cookies();

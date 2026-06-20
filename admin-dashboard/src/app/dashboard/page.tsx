@@ -25,13 +25,13 @@ function StatCard({
   label: string; value: string; sub?: string; Icon: LucideIcon; color: string;
 }) {
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 p-5 transition-shadow hover:shadow-sm">
+    <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-5 transition-shadow hover:shadow-sm">
       <span className={`inline-flex w-9 h-9 rounded-lg items-center justify-center mb-3 ${color}`}>
         <Icon className="w-5 h-5" />
       </span>
-      <p className="text-2xl font-bold text-gray-900 leading-none">{value}</p>
-      <p className="text-sm text-gray-500 mt-1.5">{label}</p>
-      {sub && <p className="text-xs text-gray-400 mt-0.5">{sub}</p>}
+      <p className="text-2xl font-bold text-gray-900 dark:text-white leading-none">{value}</p>
+      <p className="text-sm text-gray-500 dark:text-gray-400 mt-1.5">{label}</p>
+      {sub && <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{sub}</p>}
     </div>
   );
 }
@@ -61,9 +61,9 @@ export default async function DashboardPage() {
         <StatCard label="Revenue" value={`${stats.currency} ${stats.revenue.toFixed(2)}`} sub="from closed deals" Icon={DollarSign} color="bg-emerald-50 text-emerald-600" />
       </div>
 
-      <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-        <div className="px-6 py-4 border-b border-gray-100">
-          <h2 className="font-semibold text-gray-900">Recent Sessions</h2>
+      <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden">
+        <div className="px-6 py-4 border-b border-gray-100 dark:border-gray-800">
+          <h2 className="font-semibold text-gray-900 dark:text-white">Recent Sessions</h2>
         </div>
         {recent.length === 0 ? (
           <EmptyState
@@ -74,29 +74,29 @@ export default async function DashboardPage() {
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="bg-gray-50 text-gray-500 text-xs uppercase tracking-wide">
+              <thead className="bg-gray-50 dark:bg-gray-800/50 text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wide">
                 <tr>
                   {['Product', 'Channel', 'Status', 'Started', 'Price'].map(h => (
                     <th key={h} className="px-6 py-3 text-left font-medium whitespace-nowrap">{h}</th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
                 {recent.map(s => (
-                  <tr key={s.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-3 font-medium text-gray-800 truncate max-w-[180px]">
+                  <tr key={s.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/40">
+                    <td className="px-6 py-3 font-medium text-gray-800 dark:text-gray-200 truncate max-w-[180px]">
                       {s.product.name}
                     </td>
-                    <td className="px-6 py-3 text-gray-500 capitalize">{s.channel}</td>
+                    <td className="px-6 py-3 text-gray-500 dark:text-gray-400 capitalize">{s.channel}</td>
                     <td className="px-6 py-3">
                       <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${STATUS_COLORS[s.status] ?? 'bg-gray-100 text-gray-600'}`}>
                         {s.status}
                       </span>
                     </td>
-                    <td className="px-6 py-3 text-gray-500 whitespace-nowrap">
+                    <td className="px-6 py-3 text-gray-500 dark:text-gray-400 whitespace-nowrap">
                       {new Date(s.startedAt).toLocaleDateString()}
                     </td>
-                    <td className="px-6 py-3 text-gray-800 whitespace-nowrap">
+                    <td className="px-6 py-3 text-gray-800 dark:text-gray-200 whitespace-nowrap">
                       {s.finalAgreedPrice
                         ? `${s.product.currency} ${parseFloat(s.finalAgreedPrice).toFixed(2)}`
                         : '—'}

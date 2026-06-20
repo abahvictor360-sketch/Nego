@@ -134,13 +134,13 @@ export default function ProductsClient({ initialProducts, apiKey }: Props) {
   function field(label: string, key: keyof FormData, type = 'text', placeholder = '') {
     return (
       <div>
-        <label className="block text-xs font-medium text-gray-600 mb-1">{label}</label>
+        <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">{label}</label>
         <input
           type={type}
           value={form[key]}
           onChange={e => setForm(f => ({ ...f, [key]: e.target.value }))}
           placeholder={placeholder}
-          className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500"
+          className="w-full rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white px-3 py-2 text-sm outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500"
         />
       </div>
     );
@@ -157,7 +157,7 @@ export default function ProductsClient({ initialProducts, apiKey }: Props) {
         </button>
       </div>
 
-      <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+      <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden">
         {products.length === 0 ? (
           <EmptyState
             Icon={Package}
@@ -174,20 +174,20 @@ export default function ProductsClient({ initialProducts, apiKey }: Props) {
           />
         ) : (
           <table className="w-full text-sm">
-            <thead className="bg-gray-50 text-gray-500 text-xs uppercase tracking-wide">
+            <thead className="bg-gray-50 dark:bg-gray-800/50 text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wide">
               <tr>
                 {['Name', 'List Price', 'Floor Price', 'Currency', 'Active', 'Product ID', ''].map(h => (
                   <th key={h} className="px-6 py-3 text-left font-medium">{h}</th>
                 ))}
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
               {products.map(p => (
-                <tr key={p.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-3 font-medium text-gray-800">{p.name}</td>
-                  <td className="px-6 py-3 text-gray-700">{parseFloat(p.listPrice).toFixed(2)}</td>
-                  <td className="px-6 py-3 text-gray-700">{parseFloat(p.floorPrice).toFixed(2)}</td>
-                  <td className="px-6 py-3 text-gray-500">{p.currency}</td>
+                <tr key={p.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/40">
+                  <td className="px-6 py-3 font-medium text-gray-800 dark:text-gray-200">{p.name}</td>
+                  <td className="px-6 py-3 text-gray-700 dark:text-gray-300">{parseFloat(p.listPrice).toFixed(2)}</td>
+                  <td className="px-6 py-3 text-gray-700 dark:text-gray-300">{parseFloat(p.floorPrice).toFixed(2)}</td>
+                  <td className="px-6 py-3 text-gray-500 dark:text-gray-400">{p.currency}</td>
                   <td className="px-6 py-3">
                     <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${p.isActive ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
                       {p.isActive ? 'Active' : 'Inactive'}
@@ -217,9 +217,9 @@ export default function ProductsClient({ initialProducts, apiKey }: Props) {
 
       {/* Modal */}
       {modalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-          <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-6 space-y-4">
-            <h2 className="text-lg font-bold text-gray-900">{editing ? 'Edit Product' : 'New Product'}</h2>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 dark:bg-black/60 p-4">
+          <div className="w-full max-w-md bg-white dark:bg-gray-900 dark:border dark:border-gray-800 rounded-2xl shadow-xl p-6 space-y-4">
+            <h2 className="text-lg font-bold text-gray-900 dark:text-white">{editing ? 'Edit Product' : 'New Product'}</h2>
 
             {error && (
               <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
@@ -236,11 +236,11 @@ export default function ProductsClient({ initialProducts, apiKey }: Props) {
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Currency</label>
+              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Currency</label>
               <select
                 value={form.currency}
                 onChange={e => setForm(f => ({ ...f, currency: e.target.value }))}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-violet-500"
+                className="w-full rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white px-3 py-2 text-sm outline-none focus:border-violet-500"
               >
                 {['USD', 'EUR', 'GBP', 'CAD', 'AUD', 'NGN'].map(c => (
                   <option key={c}>{c}</option>
@@ -248,14 +248,14 @@ export default function ProductsClient({ initialProducts, apiKey }: Props) {
               </select>
             </div>
 
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-gray-400 dark:text-gray-500">
               Floor price is never shared with the AI or customers — it is a server-side guardrail only.
             </p>
 
             <div className="flex gap-3 pt-2">
               <button
                 onClick={() => setModalOpen(false)}
-                className="flex-1 rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50"
+                className="flex-1 rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
               >
                 Cancel
               </button>

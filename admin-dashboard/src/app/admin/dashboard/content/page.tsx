@@ -3,13 +3,14 @@
 import { useState, useEffect } from 'react';
 import { saveContentAction } from './actions';
 import Icon, { ICON_NAMES } from '@/components/Icon';
-import { Rocket, Settings, ClipboardList, Megaphone, PenLine, Check, type LucideIcon } from 'lucide-react';
+import { Rocket, Settings, ClipboardList, Megaphone, PenLine, Search, Check, type LucideIcon } from 'lucide-react';
 
 const BACKEND = process.env.NEXT_PUBLIC_BACKEND_URL ?? 'http://localhost:3001';
 
-type Tab = 'hero' | 'features' | 'how_it_works' | 'cta' | 'signup';
+type Tab = 'seo' | 'hero' | 'features' | 'how_it_works' | 'cta' | 'signup';
 
 const TABS: { id: Tab; label: string; Icon: LucideIcon }[] = [
+  { id: 'seo', label: 'SEO', Icon: Search },
   { id: 'hero', label: 'Hero', Icon: Rocket },
   { id: 'features', label: 'Features', Icon: Settings },
   { id: 'how_it_works', label: 'How It Works', Icon: ClipboardList },
@@ -31,16 +32,14 @@ function IconField({ label, value, onChange }: { label: string; value: string; o
           className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-100 transition-all bg-white"
         >
           {!ICON_NAMES.includes(value) && <option value="">Select an icon…</option>}
-          {ICON_NAMES.map(n => (
-            <option key={n} value={n}>{n}</option>
-          ))}
+          {ICON_NAMES.map(n => <option key={n} value={n}>{n}</option>)}
         </select>
       </div>
     </div>
   );
 }
 
-function Field({ label, value, onChange, multiline = false }: { label: string; value: string; onChange: (v: string) => void; multiline?: boolean }) {
+function Field({ label, value, onChange, multiline = false, hint }: { label: string; value: string; onChange: (v: string) => void; multiline?: boolean; hint?: string }) {
   return (
     <div>
       <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">{label}</label>
@@ -59,12 +58,13 @@ function Field({ label, value, onChange, multiline = false }: { label: string; v
           className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-100 transition-all"
         />
       )}
+      {hint && <p className="text-xs text-gray-400 mt-1">{hint}</p>}
     </div>
   );
 }
 
-export default function ContentPage() {
-  const [tab, setTab] = useState<Tab>('hero');
+export default function AdminContentPage() {
+  const [tab, setTab] = useState<Tab>('seo');
   const [content, setContent] = useState<Record<string, any> | null>(null);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -73,7 +73,7 @@ export default function ContentPage() {
   useEffect(() => {
     fetch(`${BACKEND}/api/content`)
       .then(r => r.json())
-      .then(d => setContent(d))
+      .then(d => setContent(d ?? {}))
       .catch(() => setError('Could not load content. Is the backend running?'));
   }, []);
 
@@ -91,11 +91,10 @@ export default function ContentPage() {
   function set(section: string, key: string, value: string) {
     setContent(prev => prev ? { ...prev, [section]: { ...prev[section], [key]: value } } : prev);
   }
-
   function setNested(section: string, arrayKey: string, index: number, field: string, value: string) {
     setContent(prev => {
       if (!prev) return prev;
-      const arr = [...(prev[section][arrayKey] ?? [])];
+      const arr = [...(prev[section]?.[arrayKey] ?? [])];
       arr[index] = { ...arr[index], [field]: value };
       return { ...prev, [section]: { ...prev[section], [arrayKey]: arr } };
     });
@@ -104,11 +103,9 @@ export default function ContentPage() {
   if (!content) {
     return (
       <div className="flex items-center justify-center h-64">
-        {error ? (
-          <p className="text-red-500 text-sm">{error}</p>
-        ) : (
+        {error ? <p className="text-red-400 text-sm">{error}</p> : (
           <div className="flex items-center gap-2 text-gray-400 text-sm">
-            <div className="w-4 h-4 border-2 border-violet-400 border-t-transparent rounded-full animate-spin" />
+            <div className="w-4 h-4 border-2 border-amber-400 border-t-transparent rounded-full animate-spin" />
             Loading content…
           </div>
         )}
@@ -120,16 +117,16 @@ export default function ContentPage() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Landing Page Content</h1>
-          <p className="text-sm text-gray-500 mt-0.5">Edit text shown on your public landing page</p>
+          <h1 className="text-2xl font-bold text-white">Content &amp; SEO</h1>
+          <p className="text-sm text-gray-400 mt-0.5">Edit every word on the public website and its search metadata.</p>
         </div>
         <div className="flex items-center gap-3">
-          {saved && <span className="text-sm text-green-600 font-medium inline-flex items-center gap-1"><Check className="w-4 h-4" /> Saved</span>}
-          {error && <span className="text-sm text-red-500">{error}</span>}
+          {saved && <span className="text-sm text-green-400 font-medium inline-flex items-center gap-1"><Check className="w-4 h-4" /> Saved</span>}
+          {error && <span className="text-sm text-red-400">{error}</span>}
           <button
             onClick={save}
             disabled={saving}
-            className="bg-violet-600 text-white text-sm font-semibold px-5 py-2 rounded-lg hover:bg-violet-700 transition-colors disabled:opacity-50"
+            className="bg-amber-500 text-gray-950 text-sm font-semibold px-5 py-2 rounded-lg hover:bg-amber-400 transition-colors disabled:opacity-50"
           >
             {saving ? 'Saving…' : 'Save Changes'}
           </button>
@@ -137,13 +134,13 @@ export default function ContentPage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 bg-gray-100 rounded-xl p-1 mb-6">
+      <div className="flex gap-1 bg-gray-900 border border-gray-800 rounded-xl p-1 mb-6 overflow-x-auto">
         {TABS.map(t => (
           <button
             key={t.id}
             onClick={() => setTab(t.id)}
-            className={`flex-1 flex items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-all ${
-              tab === t.id ? 'bg-white text-violet-700 shadow-sm' : 'text-gray-500 hover:text-gray-700'
+            className={`flex-1 flex items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-all whitespace-nowrap ${
+              tab === t.id ? 'bg-amber-500 text-gray-950' : 'text-gray-400 hover:text-white'
             }`}
           >
             <t.Icon className="w-4 h-4" />
@@ -153,6 +150,15 @@ export default function ContentPage() {
       </div>
 
       <div className="bg-white rounded-2xl border border-gray-200 p-6 space-y-5">
+        {tab === 'seo' && (
+          <>
+            <Field label="Page title (browser tab / search result)" value={content.seo?.title ?? ''} onChange={v => set('seo', 'title', v)} hint="Recommended ≤ 60 characters." />
+            <Field label="Meta description" value={content.seo?.description ?? ''} onChange={v => set('seo', 'description', v)} multiline hint="Recommended ≤ 160 characters." />
+            <Field label="Keywords (comma-separated)" value={content.seo?.keywords ?? ''} onChange={v => set('seo', 'keywords', v)} />
+            <Field label="Social share image URL (og:image)" value={content.seo?.ogImage ?? ''} onChange={v => set('seo', 'ogImage', v)} hint="1200×630px recommended." />
+            <Field label="Canonical URL" value={content.seo?.canonical ?? ''} onChange={v => set('seo', 'canonical', v)} />
+          </>
+        )}
 
         {tab === 'hero' && (
           <>

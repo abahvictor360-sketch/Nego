@@ -13,12 +13,84 @@ model Merchant {
   email     String   @unique
   password  String   // bcrypt hash — never returned to client
   apiKey    String   @unique @default(cuid())
+  role      String   @default("merchant") // "merchant" | "admin"
+  plan      String   @default("free")     // "free" | "pro"
+  status    String   @default("active")   // "active" | "suspended"
+  botName   String   @default("Max")
+  language  String   @default("en")
   createdAt DateTime @default(now())
 
-  products Product[]
-  sessions ChatSession[]
+  products      Product[]
+  sessions      ChatSession[]
+  tickets       SupportTicket[]
+  resetTokens   PasswordResetToken[]
+  notifications Notification[]
 
   @@map("merchants")
+}
+
+model Notification {
+  id         String   @id @default(cuid())
+  merchantId String
+  type       String   // "ticket_reply" | "plan_changed" | "account_suspended" | "new_ticket" | "system"
+  title      String
+  body       String   @db.Text
+  link       String?  // optional in-app path to open
+  read       Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  merchant Merchant @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+
+  @@index([merchantId, read])
+  @@map("notifications")
+}
+
+model PlatformSetting {
+  id        String   @id @default("default")
+  data      Json     @default("{}") // { email: { provider, host, port, secure, user, pass, from } }
+  updatedAt DateTime @updatedAt
+
+  @@map("platform_settings")
+}
+
+model PasswordResetToken {
+  id         String   @id @default(cuid())
+  merchantId String
+  tokenHash  String   @unique // sha256 of the raw token — raw token only ever leaves via email/link
+  expiresAt  DateTime
+  usedAt     DateTime?
+  createdAt  DateTime @default(now())
+
+  merchant Merchant @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+
+  @@map("password_reset_tokens")
+}
+
+model SupportTicket {
+  id         String   @id @default(cuid())
+  merchantId String
+  subject    String
+  status     String   @default("open")   // "open" | "pending" | "closed"
+  priority   String   @default("normal") // "low" | "normal" | "high"
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  merchant Merchant       @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+  messages TicketMessage[]
+
+  @@map("support_tickets")
+}
+
+model TicketMessage {
+  id        String   @id @default(cuid())
+  ticketId  String
+  authorRole String  // "merchant" | "admin"
+  body      String   @db.Text
+  createdAt DateTime @default(now())
+
+  ticket SupportTicket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+
+  @@map("ticket_messages")
 }
 
 model Product {

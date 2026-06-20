@@ -1,9 +1,66 @@
-import { Sparkles, Check } from 'lucide-react';
+'use client';
 
-const plans = [
+import { Sparkles, Check } from 'lucide-react';
+import { useEffect, useState } from 'react';
+
+// Exchange rates relative to USD (approximate, static — swap for a live API if needed)
+const RATES: Record<string, number> = {
+  USD: 1,
+  EUR: 0.92,
+  GBP: 0.79,
+  NGN: 1620,
+  GHS: 15.8,
+  KES: 129,
+  ZAR: 18.6,
+  MXN: 17.2,
+  BRL: 5.1,
+  CAD: 1.36,
+  AUD: 1.53,
+  INR: 83.5,
+  JPY: 157,
+  CNY: 7.24,
+  AED: 3.67,
+  SAR: 3.75,
+};
+
+const SYMBOLS: Record<string, string> = {
+  USD: '$', EUR: '€', GBP: '£', NGN: '₦', GHS: 'GH₵',
+  KES: 'KSh', ZAR: 'R', MXN: 'MX$', BRL: 'R$', CAD: 'CA$',
+  AUD: 'A$', INR: '₹', JPY: '¥', CNY: '¥', AED: 'AED', SAR: 'SAR',
+};
+
+// Map locale region to currency
+const LOCALE_CURRENCY: Record<string, string> = {
+  NG: 'NGN', GH: 'GHS', KE: 'KES', ZA: 'ZAR',
+  MX: 'MXN', BR: 'BRL', CA: 'CAD', AU: 'AUD',
+  IN: 'INR', JP: 'JPY', CN: 'CNY', AE: 'AED', SA: 'SAR',
+  GB: 'GBP', DE: 'EUR', FR: 'EUR', ES: 'EUR', IT: 'EUR',
+  NL: 'EUR', BE: 'EUR', PT: 'EUR', AT: 'EUR',
+  US: 'USD',
+};
+
+function detectCurrency(): string {
+  try {
+    const locale = Intl.DateTimeFormat().resolvedOptions().locale; // e.g. "en-NG", "es-MX"
+    const region = locale.split('-')[1]?.toUpperCase();
+    if (region && LOCALE_CURRENCY[region]) return LOCALE_CURRENCY[region];
+  } catch { /* ignore */ }
+  return 'USD';
+}
+
+function formatPrice(usd: number, currency: string): string {
+  const rate = RATES[currency] ?? 1;
+  const converted = usd * rate;
+  const symbol = SYMBOLS[currency] ?? currency + ' ';
+  const rounded = currency === 'JPY' ? Math.round(converted) : Math.round(converted * 10) / 10;
+  return `${symbol}${rounded.toLocaleString()}`;
+}
+
+const BASE_PLANS = [
   {
     name: 'Starter',
-    price: '$0',
+    usdPrice: 0,
+    priceLabel: null, // free — no conversion
     period: '/ month',
     desc: 'Perfect for small merchants testing the waters.',
     cta: 'Get Started Free',
@@ -19,7 +76,8 @@ const plans = [
   },
   {
     name: 'Growth',
-    price: '$49',
+    usdPrice: 49,
+    priceLabel: null,
     period: '/ month',
     desc: 'For growing stores that want maximum deal velocity.',
     cta: 'Start 14-day Trial',
@@ -38,7 +96,8 @@ const plans = [
   },
   {
     name: 'Enterprise',
-    price: 'Custom',
+    usdPrice: null,
+    priceLabel: 'Custom',
     period: '',
     desc: 'White-label solution for agencies and large retailers.',
     cta: 'Contact Sales',
@@ -56,6 +115,21 @@ const plans = [
 ];
 
 export default function Pricing() {
+  const [currency, setCurrency] = useState('USD');
+
+  useEffect(() => {
+    setCurrency(detectCurrency());
+  }, []);
+
+  const plans = BASE_PLANS.map(p => ({
+    ...p,
+    price: p.usdPrice === 0
+      ? 'Free'
+      : p.usdPrice === null
+        ? (p.priceLabel ?? 'Custom')
+        : formatPrice(p.usdPrice, currency),
+  }));
+
   return (
     <section id="pricing" className="py-24 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
@@ -68,6 +142,18 @@ export default function Pricing() {
           </h2>
           <p className="text-lg text-gray-500 max-w-xl mx-auto">
             Start free. Scale as you grow. No surprises.
+          </p>
+          <p className="text-xs text-gray-400 mt-2">
+            Prices shown in {currency} based on your location.{' '}
+            <select
+              value={currency}
+              onChange={e => setCurrency(e.target.value)}
+              className="underline cursor-pointer bg-transparent text-violet-600 text-xs font-medium outline-none"
+            >
+              {Object.keys(RATES).map(c => (
+                <option key={c} value={c}>{c}</option>
+              ))}
+            </select>
           </p>
         </div>
 

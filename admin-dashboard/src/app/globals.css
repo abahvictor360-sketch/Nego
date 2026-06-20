@@ -1,8 +1,16 @@
 @import "tailwindcss";
 
+/* Class-based dark mode: toggling `.dark` on <html> activates dark: variants. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
 @theme inline {
@@ -12,9 +20,6 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/* Admin is a light-only product (white cards on a gray canvas). The default
-   prefers-color-scheme dark switch is intentionally not applied so the UI
-   stays consistent regardless of the viewer's OS theme. */
 body {
   background: var(--background);
   color: var(--foreground);

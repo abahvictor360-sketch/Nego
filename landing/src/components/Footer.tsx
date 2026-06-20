@@ -21,19 +21,42 @@ const socials = [
 const cols = [
   {
     title: 'Product',
-    links: ['Features', 'How It Works', 'Pricing', 'Changelog', 'Roadmap'],
+    links: [
+      { label: 'Features', href: '/#features' },
+      { label: 'How It Works', href: '/how-it-works' },
+      { label: 'Live Demo', href: '/demo' },
+      { label: 'Pricing', href: '/pricing' },
+      { label: 'Sign In', href: 'https://nego-admin.vercel.app/login' },
+    ],
   },
   {
     title: 'Integrations',
-    links: ['WooCommerce', 'Shopify', 'Stripe', 'BigCommerce', 'Custom API'],
+    links: [
+      { label: 'WooCommerce', href: '#' },
+      { label: 'Shopify', href: '#' },
+      { label: 'Stripe', href: '#' },
+      { label: 'BigCommerce', href: '#' },
+      { label: 'Custom API', href: '#' },
+    ],
   },
   {
     title: 'Company',
-    links: ['About', 'Blog', 'Careers', 'Press Kit', 'Contact'],
+    links: [
+      { label: 'About', href: '#' },
+      { label: 'Blog', href: '#' },
+      { label: 'Careers', href: '#' },
+      { label: 'Press Kit', href: '#' },
+      { label: 'Contact', href: 'mailto:hello@negotiobot.com' },
+    ],
   },
   {
     title: 'Legal',
-    links: ['Privacy Policy', 'Terms of Service', 'Cookie Policy', 'Security'],
+    links: [
+      { label: 'Privacy Policy', href: '#' },
+      { label: 'Terms of Service', href: '#' },
+      { label: 'Cookie Policy', href: '#' },
+      { label: 'Security', href: '#' },
+    ],
   },
 ];
 
@@ -71,9 +94,9 @@ export default function Footer() {
               <h4 className="text-white font-semibold text-sm mb-4">{col.title}</h4>
               <ul className="space-y-2.5">
                 {col.links.map(link => (
-                  <li key={link}>
-                    <a href="#" className="text-sm text-gray-500 hover:text-violet-400 transition-colors">
-                      {link}
+                  <li key={link.label}>
+                    <a href={link.href} className="text-sm text-gray-500 hover:text-violet-400 transition-colors">
+                      {link.label}
                     </a>
                   </li>
                 ))}

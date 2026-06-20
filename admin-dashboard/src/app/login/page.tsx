@@ -23,8 +23,8 @@ export default function LoginPage() {
           <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-violet-600 text-white mb-4">
             <MessageCircle className="w-6 h-6" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-900">Nego Bot Admin</h1>
-          <p className="text-sm text-gray-500 mt-1">Sign in to your merchant dashboard</p>
+          <h1 className="text-2xl font-bold text-gray-900">Welcome back to Nego Bot</h1>
+          <p className="text-sm text-gray-500 mt-1">Sign in to manage your store and negotiations</p>
         </div>
 
         <form action={action} className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 space-y-4">
@@ -48,7 +48,12 @@ export default function LoginPage() {
           </div>
 
           <div className="space-y-1">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+            <div className="flex items-center justify-between">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+              <Link href="/forgot-password" className="text-xs font-medium text-violet-600 hover:text-violet-700">
+                Forgot password?
+              </Link>
+            </div>
             <input
               id="password"
               name="password"
@@ -72,6 +77,12 @@ export default function LoginPage() {
             Don&apos;t have an account?{' '}
             <Link href="/signup" className="font-semibold text-violet-600 hover:text-violet-700">
               Create one
+            </Link>
+          </p>
+          <p className="text-center text-xs text-gray-400">
+            Platform admin?{' '}
+            <Link href="/admin/login" className="text-gray-500 hover:text-gray-700 underline">
+              Admin login →
             </Link>
           </p>
         </form>

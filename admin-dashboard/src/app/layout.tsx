@@ -29,10 +29,16 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+// Runs before paint to apply the saved/system theme and avoid a flash.
+const themeScript = `(function(){try{var t=localStorage.getItem('theme');var d=t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d);}catch(e){}})();`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geist.variable} h-full`}>
-      <body className="min-h-full bg-gray-50 text-gray-900 antialiased">
+    <html lang="en" className={`${geist.variable} h-full`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body className="min-h-full bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100 antialiased">
         {children}
         <PwaRegister />
       </body>

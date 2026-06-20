@@ -8,12 +8,32 @@ interface ProductContext {
   currency: string;
 }
 
-export function buildSystemPrompt(product: ProductContext): string {
+const LANGUAGE_INSTRUCTIONS: Record<string, string> = {
+  en: 'Respond in English.',
+  pidgin: 'Respond in Nigerian Pidgin English (e.g. "How much you wan pay?", "We fit do am", "E no go reach that one"). Keep it warm and street-smart.',
+  es: 'Respond in Spanish.',
+  fr: 'Respond in French.',
+  pt: 'Respond in Portuguese.',
+  ar: 'Respond in Arabic.',
+  ha: 'Respond in Hausa.',
+  yo: 'Respond in Yoruba.',
+  ig: 'Respond in Igbo.',
+  zh: 'Respond in Mandarin Chinese.',
+};
+
+export function buildSystemPrompt(
+  product: ProductContext,
+  botName = 'Max',
+  language = 'en',
+): string {
   const price = Number(product.listPrice).toFixed(2);
   const desc = product.description ?? 'A high-quality product';
+  const langInstruction = LANGUAGE_INSTRUCTIONS[language] ?? LANGUAGE_INSTRUCTIONS['en'];
 
-  return `You are Max, a professional but personable sales negotiator for an online store.
+  return `You are ${botName}, a professional but personable sales negotiator for an online store.
 Your task is to negotiate the price of the following product with a customer in real time.
+
+LANGUAGE: ${langInstruction}
 
 PRODUCT:
 - Name: ${product.name}
