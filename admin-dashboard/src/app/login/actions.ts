@@ -47,9 +47,9 @@ export async function loginAction(
     role: string; botName: string; language: string;
   };
 
-  // Merchant login only — admins must use /admin/login
+  // Merchant login only — platform staff sign in elsewhere.
   if (merchant.role === 'admin') {
-    return { error: 'Please use the admin login page.' };
+    return { error: 'Invalid email or password.' };
   }
 
   const token = await signSession({

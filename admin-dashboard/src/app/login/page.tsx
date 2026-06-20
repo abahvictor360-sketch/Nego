@@ -79,12 +79,6 @@ export default function LoginPage() {
               Create one
             </Link>
           </p>
-          <p className="text-center text-xs text-gray-400">
-            Platform admin?{' '}
-            <Link href="/admin/login" className="text-gray-500 hover:text-gray-700 underline">
-              Admin login →
-            </Link>
-          </p>
         </form>
       </div>
     </div>

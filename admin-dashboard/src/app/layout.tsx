@@ -6,7 +6,7 @@ import PwaRegister from '@/components/PwaRegister';
 const geist = Geist({ subsets: ['latin'], variable: '--font-geist' });
 
 export const metadata: Metadata = {
-  title: 'Nego Bot — Admin',
+  title: 'Nego Bot',
   description: 'Merchant dashboard for Nego Bot price negotiation',
   manifest: '/manifest.webmanifest',
   appleWebApp: {
