@@ -20,7 +20,7 @@ export default function AdminLoginPage() {
     <div className="min-h-screen flex items-center justify-center px-4 bg-gray-50">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-green-900 text-gray-900 mb-4">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-green-900 text-white mb-4">
             <ShieldCheck className="w-6 h-6" />
           </div>
           <h1 className="text-2xl font-bold text-gray-900">Nego Platform Admin</h1>
@@ -29,7 +29,7 @@ export default function AdminLoginPage() {
 
         <form action={action} className="bg-white rounded-2xl border border-gray-200 p-6 space-y-4">
           {state?.error && (
-            <div className="rounded-lg bg-red-900/40 border border-red-700 px-3 py-2 text-sm text-red-300">
+            <div className="rounded-lg bg-red-50 border border-red-200 px-3 py-2 text-sm text-red-700">
               {state.error}
             </div>
           )}
@@ -63,14 +63,14 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={pending || state?.success}
-            className="w-full rounded-lg bg-green-900 px-4 py-2.5 text-sm font-semibold text-gray-900 hover:bg-green-600 disabled:opacity-50 transition-colors"
+            className="w-full rounded-lg bg-green-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-green-800 disabled:opacity-50 transition-colors"
           >
             {pending || state?.success ? 'Signing in…' : 'Sign in as Admin'}
           </button>
 
           <p className="text-center text-sm text-gray-500">
             Not an admin?{' '}
-            <Link href="/login" className="font-semibold text-green-800 hover:text-green-300">
+            <Link href="/login" className="font-semibold text-green-800 hover:text-green-600">
               Merchant login →
             </Link>
           </p>
