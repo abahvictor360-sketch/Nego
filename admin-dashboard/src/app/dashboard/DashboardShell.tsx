@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { useState } from 'react';
 import {
   BarChart3, Package, MessageSquare, LifeBuoy, MessageCircle, Settings, LogOut, Search, Mail,
   type LucideIcon,
@@ -63,6 +64,14 @@ export default function DashboardShell({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const router = useRouter();
+  const [query, setQuery] = useState('');
+
+  function onSearch(e: React.FormEvent) {
+    e.preventDefault();
+    const q = query.trim();
+    if (q) router.push(`/dashboard/search?q=${encodeURIComponent(q)}`);
+  }
 
   return (
     <div className="flex min-h-screen bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100">
@@ -122,14 +131,16 @@ export default function DashboardShell({
 
         {/* Desktop top bar */}
         <header className="hidden md:flex items-center gap-4 px-8 h-16 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-          <div className="relative flex-1 max-w-md">
+          <form onSubmit={onSearch} className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
             <input
               type="search"
-              placeholder="Search…"
+              value={query}
+              onChange={e => setQuery(e.target.value)}
+              placeholder="Search products & sessions…"
               className="w-full rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 pl-9 pr-4 py-2 text-sm outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500/30 transition-all"
             />
-          </div>
+          </form>
           <div className="ml-auto flex items-center gap-1.5">
             <button aria-label="Messages" className="w-9 h-9 rounded-full border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-500 hover:text-green-700 hover:border-green-300 transition-colors">
               <Mail className="w-4 h-4" />
