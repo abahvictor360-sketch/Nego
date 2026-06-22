@@ -10,7 +10,7 @@ const TESTIMONIALS = [
     name: 'Sarah Chen',
     role: 'Founder, AudioLab',
     initials: 'SC',
-    color: 'bg-violet-100 text-violet-700',
+    color: 'bg-green-100 text-green-700',
   },
   {
     quote:
@@ -37,7 +37,7 @@ export default function Testimonials() {
     <section className="py-24 px-6 bg-gray-50">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <div className="badge inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold text-violet-700 mb-4">
+          <div className="badge inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold text-green-700 mb-4">
             <Star className="w-3.5 h-3.5" /> LOVED BY MERCHANTS
           </div>
           <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-4">
@@ -57,7 +57,7 @@ export default function Testimonials() {
               }`}
               style={{ transitionDelay: inView ? `${i * 120}ms` : '0ms' }}
             >
-              <Quote className="w-8 h-8 text-violet-200 mb-4" />
+              <Quote className="w-8 h-8 text-green-200 mb-4" />
               <div className="flex gap-0.5 mb-4">
                 {Array.from({ length: 5 }).map((_, s) => (
                   <Star key={s} className="w-4 h-4 text-amber-400" fill="currentColor" />

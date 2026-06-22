@@ -16,12 +16,12 @@ export default function HowItWorks({ content }: { content: HowItWorksContent }) 
           ref={headerRef}
           className={`text-center mb-16 transition-all duration-700 ${headerIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
         >
-          <div className="badge inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold text-violet-700 mb-4">
+          <div className="badge inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold text-green-700 mb-4">
             <Sparkles className="w-3.5 h-3.5" /> {content.badge}
           </div>
           <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-4">
             {content.title.split('under 10 minutes')[0]}
-            <span className="text-violet-600">under 10 minutes</span>
+            <span className="text-green-600">under 10 minutes</span>
           </h2>
           <p className="text-lg text-gray-500 max-w-xl mx-auto">{content.subtitle}</p>
         </div>
@@ -35,9 +35,9 @@ export default function HowItWorks({ content }: { content: HowItWorksContent }) 
             >
               <div className="bg-white rounded-2xl border border-gray-100 p-8 w-full shadow-sm feature-card">
                 <div className="flex items-start gap-4">
-                  <div className="shrink-0 w-12 h-12 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center"><Icon name={step.icon} className="w-6 h-6" /></div>
+                  <div className="shrink-0 w-12 h-12 rounded-xl bg-green-50 text-green-600 flex items-center justify-center"><Icon name={step.icon} className="w-6 h-6" /></div>
                   <div>
-                    <span className="text-xs font-bold text-violet-400 tracking-widest uppercase">Step {step.n}</span>
+                    <span className="text-xs font-bold text-green-400 tracking-widest uppercase">Step {step.n}</span>
                     <h3 className="text-lg font-bold text-gray-900 mt-1 mb-2">{step.title}</h3>
                     <p className="text-sm text-gray-500 leading-relaxed">{step.description}</p>
                   </div>
@@ -45,7 +45,7 @@ export default function HowItWorks({ content }: { content: HowItWorksContent }) 
               </div>
               {i < content.steps.length - 1 && (
                 <div className="hidden md:flex items-center px-2">
-                  <ChevronRight className="w-6 h-6 text-violet-300" />
+                  <ChevronRight className="w-6 h-6 text-green-300" />
                 </div>
               )}
             </div>
@@ -68,7 +68,7 @@ export default function HowItWorks({ content }: { content: HowItWorksContent }) 
         </div>
 
         <div className="text-center mt-10">
-          <a href="/how-it-works" className="inline-flex items-center gap-2 text-violet-600 font-semibold hover:text-violet-700 transition-colors">
+          <a href="/how-it-works" className="inline-flex items-center gap-2 text-green-600 font-semibold hover:text-green-700 transition-colors">
             See the full guide &amp; FAQ
             <ChevronRight className="w-4 h-4" />
           </a>

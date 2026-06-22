@@ -31,10 +31,10 @@ export default function Nav() {
     >
       <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 font-bold text-gray-900">
-          <span className="w-8 h-8 rounded-lg bg-violet-600 flex items-center justify-center text-white">
+          <span className="w-8 h-8 rounded-lg bg-green-600 flex items-center justify-center text-white">
             <MessageCircle className="w-4 h-4" />
           </span>
-          <span className="text-lg tracking-tight">Nego<span className="text-violet-600">Bot</span></span>
+          <span className="text-lg tracking-tight">Nego<span className="text-green-600">Bot</span></span>
         </Link>
 
         <ul className="hidden md:flex items-center gap-8">
@@ -42,7 +42,7 @@ export default function Nav() {
             <li key={l.label}>
               <Link
                 href={l.href}
-                className="text-sm font-medium text-gray-600 hover:text-violet-600 transition-colors"
+                className="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors"
               >
                 {l.label}
               </Link>
@@ -59,7 +59,7 @@ export default function Nav() {
           </Link>
           <Link
             href="https://nego-admin.vercel.app/signup"
-            className="text-sm font-semibold bg-violet-600 text-white px-4 py-2 rounded-full hover:bg-violet-700 transition-colors shadow-sm shadow-violet-200"
+            className="text-sm font-semibold bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition-colors shadow-sm shadow-green-200"
           >
             Get Started Free
           </Link>
@@ -89,7 +89,7 @@ export default function Nav() {
           <Link
             href="https://nego-admin.vercel.app/signup"
             onClick={() => setMenuOpen(false)}
-            className="block text-center text-sm font-semibold bg-violet-600 text-white px-4 py-2.5 rounded-full mt-2"
+            className="block text-center text-sm font-semibold bg-green-600 text-white px-4 py-2.5 rounded-full mt-2"
           >
             Get Started Free
           </Link>

@@ -134,7 +134,7 @@ export default function Pricing() {
     <section id="pricing" className="py-24 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <div className="badge inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold text-violet-700 mb-4">
+          <div className="badge inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold text-green-700 mb-4">
             <Sparkles className="w-3.5 h-3.5" /> PRICING
           </div>
           <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-4">
@@ -148,7 +148,7 @@ export default function Pricing() {
             <select
               value={currency}
               onChange={e => setCurrency(e.target.value)}
-              className="underline cursor-pointer bg-transparent text-violet-600 text-xs font-medium outline-none"
+              className="underline cursor-pointer bg-transparent text-green-600 text-xs font-medium outline-none"
             >
               {Object.keys(RATES).map(c => (
                 <option key={c} value={c}>{c}</option>
@@ -163,7 +163,7 @@ export default function Pricing() {
               key={plan.name}
               className={`relative rounded-2xl p-8 flex flex-col ${
                 plan.highlight
-                  ? 'bg-violet-600 text-white shadow-2xl shadow-violet-200 scale-[1.02]'
+                  ? 'bg-green-600 text-white shadow-2xl shadow-green-200 scale-[1.02]'
                   : 'bg-white border border-gray-200'
               }`}
             >
@@ -174,26 +174,26 @@ export default function Pricing() {
               )}
 
               <div className="mb-6">
-                <p className={`text-sm font-semibold mb-1 ${plan.highlight ? 'text-violet-200' : 'text-gray-500'}`}>
+                <p className={`text-sm font-semibold mb-1 ${plan.highlight ? 'text-green-200' : 'text-gray-500'}`}>
                   {plan.name}
                 </p>
                 <div className="flex items-end gap-1 mb-2">
                   <span className={`text-4xl font-bold ${plan.highlight ? 'text-white' : 'text-gray-900'}`}>
                     {plan.price}
                   </span>
-                  <span className={`text-sm pb-1 ${plan.highlight ? 'text-violet-200' : 'text-gray-400'}`}>
+                  <span className={`text-sm pb-1 ${plan.highlight ? 'text-green-200' : 'text-gray-400'}`}>
                     {plan.period}
                   </span>
                 </div>
-                <p className={`text-sm ${plan.highlight ? 'text-violet-100' : 'text-gray-500'}`}>
+                <p className={`text-sm ${plan.highlight ? 'text-green-100' : 'text-gray-500'}`}>
                   {plan.desc}
                 </p>
               </div>
 
               <ul className="space-y-3 flex-1 mb-8">
                 {plan.features.map(f => (
-                  <li key={f} className={`flex items-center gap-2.5 text-sm ${plan.highlight ? 'text-violet-100' : 'text-gray-600'}`}>
-                    <Check className={`w-4 h-4 shrink-0 ${plan.highlight ? 'text-violet-200' : 'text-violet-500'}`} />
+                  <li key={f} className={`flex items-center gap-2.5 text-sm ${plan.highlight ? 'text-green-100' : 'text-gray-600'}`}>
+                    <Check className={`w-4 h-4 shrink-0 ${plan.highlight ? 'text-green-200' : 'text-green-500'}`} />
                     {f}
                   </li>
                 ))}
@@ -203,8 +203,8 @@ export default function Pricing() {
                 href={plan.ctaHref}
                 className={`block text-center font-semibold py-3 rounded-xl transition-all text-sm ${
                   plan.highlight
-                    ? 'bg-white text-violet-600 hover:bg-violet-50'
-                    : 'bg-violet-600 text-white hover:bg-violet-700'
+                    ? 'bg-white text-green-600 hover:bg-green-50'
+                    : 'bg-green-600 text-white hover:bg-green-700'
                 }`}
               >
                 {plan.cta}

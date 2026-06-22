@@ -16,12 +16,12 @@ export default function Features({ content }: { content: FeaturesContent }) {
           ref={headerRef}
           className={`text-center mb-16 transition-all duration-700 ${headerIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
         >
-          <div className="badge inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold text-violet-700 mb-4">
+          <div className="badge inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold text-green-700 mb-4">
             <Sparkles className="w-3.5 h-3.5" /> {content.badge}
           </div>
           <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-4">
             {content.title.split('close more deals')[0]}
-            <span className="text-violet-600">close more deals</span>
+            <span className="text-green-600">close more deals</span>
           </h2>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto">{content.subtitle}</p>
         </div>
@@ -30,7 +30,7 @@ export default function Features({ content }: { content: FeaturesContent }) {
           {content.items.map((f, i) => (
             <div
               key={i}
-              className={`feature-card rounded-2xl border border-gray-100 bg-white p-8 hover:border-violet-100 group transition-all duration-500 ${
+              className={`feature-card rounded-2xl border border-gray-100 bg-white p-8 hover:border-green-100 group transition-all duration-500 ${
                 gridIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
               style={{ transitionDelay: gridIn ? `${i * 100}ms` : '0ms' }}
@@ -43,7 +43,7 @@ export default function Features({ content }: { content: FeaturesContent }) {
               <ul className="space-y-2">
                 {f.points.map(p => (
                   <li key={p} className="flex items-center gap-2 text-sm text-gray-600">
-                    <Check className="w-4 h-4 text-violet-500 shrink-0" />
+                    <Check className="w-4 h-4 text-green-500 shrink-0" />
                     {p}
                   </li>
                 ))}
@@ -52,11 +52,11 @@ export default function Features({ content }: { content: FeaturesContent }) {
           ))}
         </div>
 
-        <div className={`mt-6 rounded-2xl bg-gradient-to-br from-violet-600 to-purple-700 p-8 sm:p-12 text-white flex flex-col sm:flex-row gap-8 items-center transition-all duration-700 delay-200 ${gridIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+        <div className={`mt-6 rounded-2xl bg-gradient-to-br from-green-600 to-green-700 p-8 sm:p-12 text-white flex flex-col sm:flex-row gap-8 items-center transition-all duration-700 delay-200 ${gridIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
           <div className="flex-1">
             <div className="inline-flex items-center gap-2 bg-white/10 rounded-full px-3 py-1 text-xs font-semibold mb-4"><Globe className="w-3.5 h-3.5" /> Multi-channel</div>
             <h3 className="text-2xl sm:text-3xl font-bold mb-3">Web, Mobile & In-Store QR</h3>
-            <p className="text-violet-100 text-sm leading-relaxed max-w-lg">One negotiation bot, three channels. Embed on your website, power your mobile app, or print a QR code for brick-and-mortar stores.</p>
+            <p className="text-green-100 text-sm leading-relaxed max-w-lg">One negotiation bot, three channels. Embed on your website, power your mobile app, or print a QR code for brick-and-mortar stores.</p>
           </div>
           <div className="flex gap-3 sm:gap-4">
             {[{ label: 'Web', Ico: Globe }, { label: 'Mobile', Ico: Smartphone }, { label: 'In-Store QR', Ico: QrCode }].map(ch => (

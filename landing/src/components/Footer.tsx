@@ -68,8 +68,8 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <span className="w-8 h-8 rounded-lg bg-violet-600 flex items-center justify-center text-white"><MessageCircle className="w-4 h-4" /></span>
-              <span className="font-bold text-white text-lg">Nego<span className="text-violet-400">Bot</span></span>
+              <span className="w-8 h-8 rounded-lg bg-green-600 flex items-center justify-center text-white"><MessageCircle className="w-4 h-4" /></span>
+              <span className="font-bold text-white text-lg">Nego<span className="text-green-400">Bot</span></span>
             </div>
             <p className="text-sm leading-relaxed text-gray-500 mb-4">
               AI-powered price negotiation for modern e-commerce merchants.
@@ -80,7 +80,7 @@ export default function Footer() {
                   key={s.label}
                   href={s.href}
                   aria-label={s.label}
-                  className="w-8 h-8 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-violet-600 transition-colors"
+                  className="w-8 h-8 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-green-600 transition-colors"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d={s.path} /></svg>
                 </a>
@@ -95,7 +95,7 @@ export default function Footer() {
               <ul className="space-y-2.5">
                 {col.links.map(link => (
                   <li key={link.label}>
-                    <a href={link.href} className="text-sm text-gray-500 hover:text-violet-400 transition-colors">
+                    <a href={link.href} className="text-sm text-gray-500 hover:text-green-400 transition-colors">
                       {link.label}
                     </a>
                   </li>

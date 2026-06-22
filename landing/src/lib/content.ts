@@ -84,7 +84,7 @@ const DEFAULTS: SiteContent = {
     subtitle:
       'Empower your store with intelligent negotiation that converts hesitant shoppers into paying customers — without sacrificing your margins.',
     items: [
-      { icon: 'bot', color: 'bg-violet-50 text-violet-600', title: 'AI Negotiation Engine', description: 'Claude-powered negotiator engages customers in human-like price conversations — conceding strategically, anchoring high, and closing deals fast.', points: ['Value-based selling', 'Adaptive concession strategy', 'Scarcity & urgency signals'] },
+      { icon: 'bot', color: 'bg-green-50 text-green-600', title: 'AI Negotiation Engine', description: 'Claude-powered negotiator engages customers in human-like price conversations — conceding strategically, anchoring high, and closing deals fast.', points: ['Value-based selling', 'Adaptive concession strategy', 'Scarcity & urgency signals'] },
       { icon: 'shield', color: 'bg-green-50 text-green-600', title: 'Floor Price Guard', description: 'Your minimum price is stored server-side only. The AI never sees it — making it completely immune to prompt injection and customer manipulation.', points: ['Server-side enforcement', 'HMAC-signed checkout URLs', 'Tamper-proof pricing'] },
       { icon: 'chart', color: 'bg-blue-50 text-blue-600', title: 'Real-time Analytics', description: 'Track deal rate, average discount, revenue protected, and session history. Know exactly which products negotiate best and where to tighten your floor.', points: ['Deal rate tracking', 'Avg discount analytics', 'Session replay logs'] },
       { icon: 'zap', color: 'bg-orange-50 text-orange-600', title: 'One-click Integration', description: 'Drop a single script tag into any webpage, WooCommerce site, or Shopify theme. Works with Stripe Checkout and WooCommerce cart natively.', points: ['WooCommerce & Shopify', 'Stripe Checkout native', 'QR code & in-store mode'] },
@@ -107,7 +107,7 @@ const DEFAULTS: SiteContent = {
     cta_secondary: 'Try Live Demo',
     stats: [
       { label: '2,847 Deals Closed', icon: 'handshake', color: 'text-green-400' },
-      { label: '$1.2M Revenue Protected', icon: 'shield', color: 'text-violet-300' },
+      { label: '$1.2M Revenue Protected', icon: 'shield', color: 'text-green-300' },
       { label: '94% Margin Preserved', icon: 'trending-up', color: 'text-blue-400' },
     ],
   },

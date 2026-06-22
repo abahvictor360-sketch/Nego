@@ -10,8 +10,8 @@ export default function CTA({ content }: { content: CtaContent }) {
 
   return (
     <section className="py-24 px-6 cta-gradient relative overflow-hidden">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-violet-800 rounded-full blur-[120px] opacity-30 pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-64 h-64 bg-purple-700 rounded-full blur-[80px] opacity-20 pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-green-800 rounded-full blur-[120px] opacity-30 pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-64 h-64 bg-green-700 rounded-full blur-[80px] opacity-20 pointer-events-none" />
 
       <div
         ref={ref}
@@ -32,12 +32,12 @@ export default function CTA({ content }: { content: CtaContent }) {
 
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6 leading-tight">
           {content.title.split('deals for you')[0]}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-300 to-purple-300">deals for you?</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-green-300">deals for you?</span>
         </h2>
         <p className="text-lg text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">{content.subtitle}</p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="https://nego-admin.vercel.app/signup" className="inline-flex items-center justify-center gap-2 bg-violet-500 text-white font-semibold px-8 py-4 rounded-full hover:bg-violet-400 transition-all shadow-lg shadow-violet-900/50 hover:-translate-y-0.5">
+          <a href="https://nego-admin.vercel.app/signup" className="inline-flex items-center justify-center gap-2 bg-green-500 text-white font-semibold px-8 py-4 rounded-full hover:bg-green-400 transition-all shadow-lg shadow-green-900/50 hover:-translate-y-0.5">
             {content.cta_primary}
             <ArrowRight className="w-4 h-4" />
           </a>
