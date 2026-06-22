@@ -28,7 +28,7 @@ function CopyButton({ text }: { text: string }) {
   return (
     <button
       onClick={handleCopy}
-      className="inline-flex items-center gap-1.5 text-xs font-medium text-violet-600 hover:text-violet-800 bg-violet-50 hover:bg-violet-100 px-3 py-1.5 rounded-lg transition-colors"
+      className="inline-flex items-center gap-1.5 text-xs font-medium text-green-600 hover:text-green-800 bg-green-50 hover:bg-green-100 px-3 py-1.5 rounded-lg transition-colors"
     >
       {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
       {copied ? 'Copied!' : 'Copy'}
@@ -69,7 +69,7 @@ export default function SettingsClient({ name, email, apiKey, botName, language,
       {/* Bot Negotiator Settings */}
       <section className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-6 space-y-4">
         <div className="flex items-center gap-2">
-          <Bot className="w-4 h-4 text-violet-600" />
+          <Bot className="w-4 h-4 text-green-600" />
           <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Bot Negotiator</h2>
         </div>
         <p className="text-xs text-gray-400">Customise how your AI negotiator introduces itself and what language it speaks.</p>
@@ -97,7 +97,7 @@ export default function SettingsClient({ name, email, apiKey, botName, language,
               maxLength={50}
               placeholder="Max"
               required
-              className="w-full rounded-lg border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white px-3 py-2 text-sm outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-100 transition-all"
+              className="w-full rounded-lg border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white px-3 py-2 text-sm outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition-all"
             />
           </div>
 
@@ -108,7 +108,7 @@ export default function SettingsClient({ name, email, apiKey, botName, language,
             <select
               name="language"
               defaultValue={language}
-              className="w-full rounded-lg border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white px-3 py-2 text-sm outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-100 transition-all bg-white"
+              className="w-full rounded-lg border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white px-3 py-2 text-sm outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition-all bg-white"
             >
               {LANGUAGES.map(l => (
                 <option key={l.code} value={l.code}>{l.label}</option>
@@ -120,7 +120,7 @@ export default function SettingsClient({ name, email, apiKey, botName, language,
           <button
             type="submit"
             disabled={botPending}
-            className="bg-violet-600 text-white text-sm font-semibold px-5 py-2 rounded-lg hover:bg-violet-700 transition-colors disabled:opacity-50"
+            className="bg-green-600 text-white text-sm font-semibold px-5 py-2 rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50"
           >
             {botPending ? 'Saving…' : 'Save Bot Settings'}
           </button>
@@ -133,7 +133,7 @@ export default function SettingsClient({ name, email, apiKey, botName, language,
       {/* API Key */}
       <section className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-6 space-y-3">
         <div className="flex items-center gap-2">
-          <KeyRound className="w-4 h-4 text-violet-600" />
+          <KeyRound className="w-4 h-4 text-green-600" />
           <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide">API Key</h2>
         </div>
         <p className="text-xs text-gray-400">Use this key in your widget embed code and API requests.</p>
@@ -179,7 +179,7 @@ export default function SettingsClient({ name, email, apiKey, botName, language,
       {/* Change password */}
       <section className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-6 space-y-4">
         <div className="flex items-center gap-2">
-          <Lock className="w-4 h-4 text-violet-600" />
+          <Lock className="w-4 h-4 text-green-600" />
           <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Change Password</h2>
         </div>
 
@@ -207,14 +207,14 @@ export default function SettingsClient({ name, email, apiKey, botName, language,
                 name={name}
                 required
                 minLength={name !== 'currentPassword' ? 8 : undefined}
-                className="w-full rounded-lg border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white px-3 py-2 text-sm outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-100 transition-all"
+                className="w-full rounded-lg border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white px-3 py-2 text-sm outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition-all"
               />
             </div>
           ))}
           <button
             type="submit"
             disabled={pwPending}
-            className="bg-violet-600 text-white text-sm font-semibold px-5 py-2 rounded-lg hover:bg-violet-700 transition-colors disabled:opacity-50"
+            className="bg-green-600 text-white text-sm font-semibold px-5 py-2 rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50"
           >
             {pwPending ? 'Updating…' : 'Update Password'}
           </button>

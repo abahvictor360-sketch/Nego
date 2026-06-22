@@ -3,7 +3,7 @@ import { api, type Session } from '@/lib/api';
 import PageHeader from '@/components/PageHeader';
 import EmptyState from '@/components/EmptyState';
 import {
-  MessageSquare, Handshake, TrendingUp, Tag, DollarSign, type LucideIcon,
+  MessageSquare, Handshake, TrendingUp, DollarSign, ArrowUpRight, type LucideIcon,
 } from 'lucide-react';
 
 function computeAnalytics(sessions: Session[]) {
@@ -20,18 +20,38 @@ function computeAnalytics(sessions: Session[]) {
 }
 
 function StatCard({
-  label, value, sub, Icon, color,
+  label, value, pill, Icon, filled = false,
 }: {
-  label: string; value: string; sub?: string; Icon: LucideIcon; color: string;
+  label: string; value: string; pill?: string; Icon: LucideIcon; filled?: boolean;
 }) {
   return (
-    <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-5 transition-shadow hover:shadow-sm">
-      <span className={`inline-flex w-9 h-9 rounded-lg items-center justify-center mb-3 ${color}`}>
-        <Icon className="w-5 h-5" />
-      </span>
-      <p className="text-2xl font-bold text-gray-900 dark:text-white leading-none">{value}</p>
-      <p className="text-sm text-gray-500 dark:text-gray-400 mt-1.5">{label}</p>
-      {sub && <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{sub}</p>}
+    <div
+      className={`rounded-2xl p-5 ${
+        filled
+          ? 'bg-green-900 text-white'
+          : 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800'
+      }`}
+    >
+      <div className="flex items-start justify-between">
+        <p className={`text-sm ${filled ? 'text-green-200' : 'text-gray-500 dark:text-gray-400'}`}>{label}</p>
+        <span
+          className={`w-8 h-8 rounded-full flex items-center justify-center ${
+            filled ? 'bg-white/15 text-white' : 'border border-gray-200 dark:border-gray-700 text-gray-400'
+          }`}
+        >
+          <ArrowUpRight className="w-4 h-4" />
+        </span>
+      </div>
+      <p className={`text-3xl font-bold mt-3 ${filled ? 'text-white' : 'text-gray-900 dark:text-white'}`}>{value}</p>
+      {pill && (
+        <span
+          className={`inline-flex items-center gap-1 mt-3 rounded-full px-2.5 py-1 text-xs font-medium ${
+            filled ? 'bg-white/15 text-white' : 'bg-green-50 text-green-700 dark:bg-green-500/10 dark:text-green-300'
+          }`}
+        >
+          <Icon className="w-3.5 h-3.5" /> {pill}
+        </span>
+      )}
     </div>
   );
 }
@@ -50,15 +70,20 @@ export default async function DashboardPage() {
   const recent = sessions.slice(0, 10);
 
   return (
-    <div className="max-w-5xl">
-      <PageHeader title="Analytics" subtitle="Your negotiation performance at a glance" />
+    <div className="max-w-6xl">
+      <PageHeader title="Performance Summary" subtitle="View your key negotiation metrics at a glance." />
 
-      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
-        <StatCard label="Total Sessions" value={stats.total.toString()} Icon={MessageSquare} color="bg-violet-50 text-violet-600" />
-        <StatCard label="Deals Closed" value={stats.agreed.toString()} Icon={Handshake} color="bg-green-50 text-green-600" />
-        <StatCard label="Deal Rate" value={`${stats.dealRate.toFixed(1)}%`} sub="agreed / total" Icon={TrendingUp} color="bg-blue-50 text-blue-600" />
-        <StatCard label="Avg Discount" value={`${stats.avgDiscount.toFixed(1)}%`} sub="on agreed deals" Icon={Tag} color="bg-orange-50 text-orange-600" />
-        <StatCard label="Revenue" value={`${stats.currency} ${stats.revenue.toFixed(2)}`} sub="from closed deals" Icon={DollarSign} color="bg-emerald-50 text-emerald-600" />
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <StatCard
+          label="Revenue"
+          value={`${stats.currency} ${stats.revenue.toLocaleString(undefined, { maximumFractionDigits: 2 })}`}
+          pill="from closed deals"
+          Icon={DollarSign}
+          filled
+        />
+        <StatCard label="Total Sessions" value={stats.total.toString()} pill="all time" Icon={MessageSquare} />
+        <StatCard label="Deals Closed" value={stats.agreed.toString()} pill={`${stats.dealRate.toFixed(0)}% deal rate`} Icon={Handshake} />
+        <StatCard label="Avg Discount" value={`${stats.avgDiscount.toFixed(1)}%`} pill="on agreed deals" Icon={TrendingUp} />
       </div>
 
       <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden">

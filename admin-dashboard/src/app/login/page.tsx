@@ -20,7 +20,7 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-violet-600 text-white mb-4">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-green-600 text-white mb-4">
             <MessageCircle className="w-6 h-6" />
           </div>
           <h1 className="text-2xl font-bold text-gray-900">Welcome back to Nego Bot</h1>
@@ -42,7 +42,7 @@ export default function LoginPage() {
               type="email"
               autoComplete="email"
               required
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500"
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500"
               placeholder="you@example.com"
             />
           </div>
@@ -50,7 +50,7 @@ export default function LoginPage() {
           <div className="space-y-1">
             <div className="flex items-center justify-between">
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
-              <Link href="/forgot-password" className="text-xs font-medium text-violet-600 hover:text-violet-700">
+              <Link href="/forgot-password" className="text-xs font-medium text-green-600 hover:text-green-700">
                 Forgot password?
               </Link>
             </div>
@@ -60,7 +60,7 @@ export default function LoginPage() {
               type="password"
               autoComplete="current-password"
               required
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500"
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500"
               placeholder="••••••••"
             />
           </div>
@@ -68,14 +68,14 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={pending || state?.success}
-            className="w-full rounded-lg bg-violet-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-violet-700 disabled:opacity-50 transition-colors"
+            className="w-full rounded-lg bg-green-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-green-700 disabled:opacity-50 transition-colors"
           >
             {pending || state?.success ? 'Signing in…' : 'Sign in'}
           </button>
 
           <p className="text-center text-sm text-gray-500">
             Don&apos;t have an account?{' '}
-            <Link href="/signup" className="font-semibold text-violet-600 hover:text-violet-700">
+            <Link href="/signup" className="font-semibold text-green-600 hover:text-green-700">
               Create one
             </Link>
           </p>

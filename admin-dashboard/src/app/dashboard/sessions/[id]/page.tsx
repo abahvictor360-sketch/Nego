@@ -32,7 +32,7 @@ function ChatBubble({ msg }: { msg: Message }) {
         <div
           className={`rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
             isUser
-              ? 'bg-violet-600 text-white rounded-br-sm'
+              ? 'bg-green-600 text-white rounded-br-sm'
               : 'bg-white border border-gray-200 text-gray-800 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 rounded-bl-sm'
           }`}
         >
@@ -96,7 +96,7 @@ export default async function SessionDetailPage({ params }: Props) {
             href={session.checkoutUrl}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-violet-600 hover:text-violet-800 bg-violet-50 hover:bg-violet-100 dark:text-violet-300 dark:bg-violet-500/15 dark:hover:bg-violet-500/25 px-4 py-2 rounded-lg transition-colors whitespace-nowrap"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-green-600 hover:text-green-800 bg-green-50 hover:bg-green-100 dark:text-green-300 dark:bg-green-500/15 dark:hover:bg-green-500/25 px-4 py-2 rounded-lg transition-colors whitespace-nowrap"
           >
             Checkout URL <ExternalLink className="w-3.5 h-3.5" />
           </a>

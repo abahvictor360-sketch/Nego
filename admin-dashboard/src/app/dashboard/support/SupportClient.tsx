@@ -81,12 +81,12 @@ export default function SupportClient({ initialTickets }: { initialTickets: Tick
           <div>
             <label className="block text-xs font-medium text-gray-600 mb-1">Subject</label>
             <input value={subject} onChange={e => setSubject(e.target.value)} placeholder="Brief summary of your issue"
-              className="w-full rounded-lg border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white px-3 py-2 text-sm outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-100" />
+              className="w-full rounded-lg border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white px-3 py-2 text-sm outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100" />
           </div>
           <div>
             <label className="block text-xs font-medium text-gray-600 mb-1">Priority</label>
             <select value={priority} onChange={e => setPriority(e.target.value as 'low' | 'normal' | 'high')}
-              className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none focus:border-violet-500 bg-white">
+              className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none focus:border-green-500 bg-white">
               <option value="low">Low</option>
               <option value="normal">Normal</option>
               <option value="high">High</option>
@@ -95,10 +95,10 @@ export default function SupportClient({ initialTickets }: { initialTickets: Tick
           <div>
             <label className="block text-xs font-medium text-gray-600 mb-1">Message</label>
             <textarea value={message} onChange={e => setMessage(e.target.value)} rows={5} placeholder="Describe your issue in detail…"
-              className="w-full rounded-lg border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white px-3 py-2 text-sm outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-100 resize-none" />
+              className="w-full rounded-lg border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white px-3 py-2 text-sm outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 resize-none" />
           </div>
           <button onClick={submitNew} disabled={pending}
-            className="bg-violet-600 text-white text-sm font-semibold px-5 py-2 rounded-lg hover:bg-violet-700 transition-colors disabled:opacity-50">
+            className="bg-green-600 text-white text-sm font-semibold px-5 py-2 rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50">
             {pending ? 'Submitting…' : 'Submit ticket'}
           </button>
         </div>
@@ -123,10 +123,10 @@ export default function SupportClient({ initialTickets }: { initialTickets: Tick
           {selected.messages.map(m => (
             <div key={m.id} className={`flex ${m.authorRole === 'merchant' ? 'justify-end' : 'justify-start'}`}>
               <div className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm ${
-                m.authorRole === 'merchant' ? 'bg-violet-600 text-white rounded-tr-sm' : 'bg-gray-100 text-gray-800 rounded-tl-sm'
+                m.authorRole === 'merchant' ? 'bg-green-600 text-white rounded-tr-sm' : 'bg-gray-100 text-gray-800 rounded-tl-sm'
               }`}>
                 <p className="whitespace-pre-wrap">{m.body}</p>
-                <p className={`text-[10px] mt-1 ${m.authorRole === 'merchant' ? 'text-violet-200' : 'text-gray-400'}`}>
+                <p className={`text-[10px] mt-1 ${m.authorRole === 'merchant' ? 'text-green-200' : 'text-gray-400'}`}>
                   {m.authorRole === 'merchant' ? 'You' : 'Support'} · {new Date(m.createdAt).toLocaleString()}
                 </p>
               </div>
@@ -137,9 +137,9 @@ export default function SupportClient({ initialTickets }: { initialTickets: Tick
         {selected.status !== 'closed' ? (
           <div className="flex items-end gap-2">
             <textarea value={reply} onChange={e => setReply(e.target.value)} rows={2} placeholder="Type your reply…"
-              className="flex-1 rounded-xl border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white px-3 py-2 text-sm outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-100 resize-none" />
+              className="flex-1 rounded-xl border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white px-3 py-2 text-sm outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 resize-none" />
             <button onClick={submitReply} disabled={pending || !reply.trim()}
-              className="bg-violet-600 text-white p-2.5 rounded-xl hover:bg-violet-700 transition-colors disabled:opacity-50">
+              className="bg-green-600 text-white p-2.5 rounded-xl hover:bg-green-700 transition-colors disabled:opacity-50">
               <Send className="w-4 h-4" />
             </button>
           </div>
@@ -160,7 +160,7 @@ export default function SupportClient({ initialTickets }: { initialTickets: Tick
           <p className="text-sm text-gray-500 mt-0.5">Get help from the Nego Bot team.</p>
         </div>
         <button onClick={() => setView('new')}
-          className="inline-flex items-center gap-1.5 bg-violet-600 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-violet-700 transition-colors">
+          className="inline-flex items-center gap-1.5 bg-green-600 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
           <Plus className="w-4 h-4" /> New ticket
         </button>
       </div>

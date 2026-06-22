@@ -97,7 +97,7 @@ export default function NotificationBell({ tone = 'light' }: { tone?: 'light' | 
           <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 dark:border-gray-800">
             <span className="text-sm font-semibold text-gray-900 dark:text-white">Notifications</span>
             {unread > 0 && (
-              <button onClick={markAll} className="text-xs text-violet-600 dark:text-amber-400 hover:underline inline-flex items-center gap-1">
+              <button onClick={markAll} className="text-xs text-green-600 dark:text-amber-400 hover:underline inline-flex items-center gap-1">
                 <CheckCheck className="w-3.5 h-3.5" /> Mark all read
               </button>
             )}
@@ -112,11 +112,11 @@ export default function NotificationBell({ tone = 'light' }: { tone?: 'light' | 
                   key={n.id}
                   onClick={() => openItem(n)}
                   className={`w-full text-left px-4 py-3 border-b border-gray-50 dark:border-gray-800/60 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/50 ${
-                    n.read ? '' : 'bg-violet-50/50 dark:bg-amber-500/5'
+                    n.read ? '' : 'bg-green-50/50 dark:bg-amber-500/5'
                   }`}
                 >
                   <div className="flex items-start gap-2">
-                    {!n.read && <span className="w-2 h-2 mt-1.5 rounded-full bg-violet-500 dark:bg-amber-400 shrink-0" />}
+                    {!n.read && <span className="w-2 h-2 mt-1.5 rounded-full bg-green-500 dark:bg-amber-400 shrink-0" />}
                     <div className={`min-w-0 ${n.read ? 'pl-4' : ''}`}>
                       <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{n.title}</p>
                       <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2">{n.body}</p>

@@ -47,7 +47,7 @@ export default function InstallApp() {
   return (
     <section className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-6 space-y-3">
       <div className="flex items-center gap-2">
-        <Download className="w-4 h-4 text-violet-600 dark:text-violet-400" />
+        <Download className="w-4 h-4 text-green-600 dark:text-green-400" />
         <h2 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Install App</h2>
       </div>
       <p className="text-xs text-gray-400 dark:text-gray-500">
@@ -60,7 +60,7 @@ export default function InstallApp() {
         </div>
       ) : isIOS ? (
         <div className="flex items-start gap-2 text-sm text-gray-600 bg-gray-50 border border-gray-200 dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700 rounded-lg px-4 py-3">
-          <Share className="w-4 h-4 mt-0.5 shrink-0 text-violet-600 dark:text-violet-400" />
+          <Share className="w-4 h-4 mt-0.5 shrink-0 text-green-600 dark:text-green-400" />
           <span>
             On iOS, tap the <strong>Share</strong> button in Safari, then choose{' '}
             <strong>&quot;Add to Home Screen&quot;</strong>.
@@ -69,7 +69,7 @@ export default function InstallApp() {
       ) : deferred ? (
         <button
           onClick={handleInstall}
-          className="inline-flex items-center gap-2 bg-violet-600 text-white text-sm font-semibold px-5 py-2 rounded-lg hover:bg-violet-700 transition-colors"
+          className="inline-flex items-center gap-2 bg-green-600 text-white text-sm font-semibold px-5 py-2 rounded-lg hover:bg-green-700 transition-colors"
         >
           <Download className="w-4 h-4" /> Install Nego Bot
         </button>

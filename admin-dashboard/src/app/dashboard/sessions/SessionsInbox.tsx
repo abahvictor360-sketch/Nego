@@ -17,7 +17,7 @@ const STATUS_META: Record<string, { label: string; dot: string; pill: string }> 
 };
 
 const AVATAR_COLORS = [
-  'bg-violet-500', 'bg-blue-500', 'bg-emerald-500', 'bg-amber-500',
+  'bg-green-500', 'bg-blue-500', 'bg-emerald-500', 'bg-amber-500',
   'bg-rose-500', 'bg-cyan-500', 'bg-indigo-500', 'bg-pink-500',
 ];
 
@@ -121,7 +121,7 @@ export default function SessionsInbox({ initialSessions }: { initialSessions: Se
                 value={query}
                 onChange={e => setQuery(e.target.value)}
                 placeholder="Search conversations…"
-                className="w-full rounded-lg border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white pl-9 pr-3 py-2 text-sm outline-none focus:border-violet-500"
+                className="w-full rounded-lg border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white pl-9 pr-3 py-2 text-sm outline-none focus:border-green-500"
               />
             </div>
             <div className="flex gap-1 overflow-x-auto">
@@ -131,7 +131,7 @@ export default function SessionsInbox({ initialSessions }: { initialSessions: Se
                   onClick={() => setFilter(f)}
                   className={`px-2.5 py-1 rounded-full text-xs font-medium capitalize whitespace-nowrap transition-colors ${
                     filter === f
-                      ? 'bg-violet-600 text-white'
+                      ? 'bg-green-600 text-white'
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'
                   }`}
                 >
@@ -157,7 +157,7 @@ export default function SessionsInbox({ initialSessions }: { initialSessions: Se
                     key={s.id}
                     onClick={() => setSelectedId(s.id)}
                     className={`w-full text-left px-3 py-3 flex gap-3 border-b border-gray-50 dark:border-gray-800/60 transition-colors ${
-                      active ? 'bg-violet-50 dark:bg-violet-500/10' : 'hover:bg-gray-50 dark:hover:bg-gray-800/50'
+                      active ? 'bg-green-50 dark:bg-green-500/10' : 'hover:bg-gray-50 dark:hover:bg-gray-800/50'
                     }`}
                   >
                     <span className={`w-10 h-10 shrink-0 rounded-full ${AVATAR_COLORS[hash(s.id) % AVATAR_COLORS.length]} text-white text-sm font-semibold flex items-center justify-center`}>
@@ -262,7 +262,7 @@ function ThreadView({
             target="_blank"
             rel="noreferrer"
             title="Open checkout URL"
-            className="hidden sm:inline-flex items-center gap-1 text-xs font-semibold text-violet-600 dark:text-violet-400 hover:underline"
+            className="hidden sm:inline-flex items-center gap-1 text-xs font-semibold text-green-600 dark:text-green-400 hover:underline"
           >
             Checkout <ExternalLink className="w-3.5 h-3.5" />
           </a>
@@ -276,7 +276,7 @@ function ThreadView({
       <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50/60 dark:bg-gray-950/40">
         {loading ? (
           <div className="flex items-center justify-center h-full text-gray-400 text-sm gap-2">
-            <span className="w-4 h-4 border-2 border-violet-400 border-t-transparent rounded-full animate-spin" />
+            <span className="w-4 h-4 border-2 border-green-400 border-t-transparent rounded-full animate-spin" />
             Loading…
           </div>
         ) : messages.length === 0 ? (
@@ -302,7 +302,7 @@ function Bubble({ msg, channel, avatarSeed, customer }: { msg: Message; channel:
     return (
       <div className="flex justify-end">
         <div className="max-w-[78%]">
-          <div className="bg-violet-600 text-white rounded-2xl rounded-tr-sm px-4 py-2.5 text-sm leading-relaxed">{text}</div>
+          <div className="bg-green-600 text-white rounded-2xl rounded-tr-sm px-4 py-2.5 text-sm leading-relaxed">{text}</div>
           <p className="text-[11px] text-gray-400 mt-1 text-right">{time} · via {channel}</p>
         </div>
       </div>
@@ -384,7 +384,7 @@ function InfoPanel({ session, detail }: { session: Session; detail: SessionDetai
               href={session.checkoutUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-violet-600 dark:text-violet-400 hover:underline"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-green-600 dark:text-green-400 hover:underline"
             >
               Open checkout <ExternalLink className="w-3.5 h-3.5" />
             </a>

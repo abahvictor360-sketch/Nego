@@ -16,7 +16,7 @@ function CopyId({ id }: { id: string }) {
     <button
       onClick={handleCopy}
       title="Copy product ID for embed snippet"
-      className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-violet-600 transition-colors"
+      className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-green-600 transition-colors"
     >
       {copied ? <Check className="w-3.5 h-3.5 text-green-500" /> : <Copy className="w-3.5 h-3.5" />}
       <span className="font-mono">{id.slice(-8)}</span>
@@ -140,7 +140,7 @@ export default function ProductsClient({ initialProducts, apiKey }: Props) {
           value={form[key]}
           onChange={e => setForm(f => ({ ...f, [key]: e.target.value }))}
           placeholder={placeholder}
-          className="w-full rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white px-3 py-2 text-sm outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500"
+          className="w-full rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white px-3 py-2 text-sm outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500"
         />
       </div>
     );
@@ -151,7 +151,7 @@ export default function ProductsClient({ initialProducts, apiKey }: Props) {
       <div className="flex justify-end mb-4">
         <button
           onClick={openNew}
-          className="rounded-lg bg-violet-600 px-4 py-2 text-sm font-semibold text-white hover:bg-violet-700 transition-colors"
+          className="rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white hover:bg-green-700 transition-colors"
         >
           + Add Product
         </button>
@@ -166,7 +166,7 @@ export default function ProductsClient({ initialProducts, apiKey }: Props) {
             action={
               <button
                 onClick={openNew}
-                className="rounded-lg bg-violet-600 px-4 py-2 text-sm font-semibold text-white hover:bg-violet-700 transition-colors"
+                className="rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white hover:bg-green-700 transition-colors"
               >
                 + Add Product
               </button>
@@ -198,7 +198,7 @@ export default function ProductsClient({ initialProducts, apiKey }: Props) {
                   </td>
                   <td className="px-6 py-3">
                     <div className="flex gap-2 justify-end">
-                      <button onClick={() => openEdit(p)} className="text-xs text-violet-600 hover:underline">Edit</button>
+                      <button onClick={() => openEdit(p)} className="text-xs text-green-600 hover:underline">Edit</button>
                       <button
                         onClick={() => handleDelete(p.id)}
                         disabled={deletingId === p.id}
@@ -240,7 +240,7 @@ export default function ProductsClient({ initialProducts, apiKey }: Props) {
               <select
                 value={form.currency}
                 onChange={e => setForm(f => ({ ...f, currency: e.target.value }))}
-                className="w-full rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white px-3 py-2 text-sm outline-none focus:border-violet-500"
+                className="w-full rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white px-3 py-2 text-sm outline-none focus:border-green-500"
               >
                 {['USD', 'EUR', 'GBP', 'CAD', 'AUD', 'NGN'].map(c => (
                   <option key={c}>{c}</option>
@@ -262,7 +262,7 @@ export default function ProductsClient({ initialProducts, apiKey }: Props) {
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="flex-1 rounded-lg bg-violet-600 px-4 py-2 text-sm font-semibold text-white hover:bg-violet-700 disabled:opacity-50"
+                className="flex-1 rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white hover:bg-green-700 disabled:opacity-50"
               >
                 {saving ? 'Saving…' : editing ? 'Save Changes' : 'Create Product'}
               </button>
