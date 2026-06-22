@@ -2,6 +2,7 @@ import { getSession } from '@/lib/session';
 import { api, type Session } from '@/lib/api';
 import PageHeader from '@/components/PageHeader';
 import EmptyState from '@/components/EmptyState';
+import { Money } from '@/components/CurrencyContext';
 import {
   MessageSquare, Handshake, TrendingUp, DollarSign, ArrowUpRight, type LucideIcon,
 } from 'lucide-react';
@@ -22,7 +23,7 @@ function computeAnalytics(sessions: Session[]) {
 function StatCard({
   label, value, pill, Icon, filled = false,
 }: {
-  label: string; value: string; pill?: string; Icon: LucideIcon; filled?: boolean;
+  label: string; value: React.ReactNode; pill?: string; Icon: LucideIcon; filled?: boolean;
 }) {
   return (
     <div
@@ -76,7 +77,7 @@ export default async function DashboardPage() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <StatCard
           label="Revenue"
-          value={`${stats.currency} ${stats.revenue.toLocaleString(undefined, { maximumFractionDigits: 2 })}`}
+          value={<Money amount={stats.revenue} base={stats.currency} />}
           pill="from closed deals"
           Icon={DollarSign}
           filled
@@ -123,7 +124,7 @@ export default async function DashboardPage() {
                     </td>
                     <td className="px-6 py-3 text-gray-800 dark:text-gray-200 whitespace-nowrap">
                       {s.finalAgreedPrice
-                        ? `${s.product.currency} ${parseFloat(s.finalAgreedPrice).toFixed(2)}`
+                        ? <Money amount={parseFloat(s.finalAgreedPrice)} base={s.product.currency} />
                         : '—'}
                     </td>
                   </tr>

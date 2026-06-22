@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import NotificationBell from '@/components/NotificationBell';
 import ThemeToggle from '@/components/ThemeToggle';
+import { CurrencyProvider, CurrencySelect } from '@/components/CurrencyContext';
 
 type NavItem = { href: string; label: string; short: string; Icon: LucideIcon };
 
@@ -74,6 +75,7 @@ export default function DashboardShell({
   }
 
   return (
+    <CurrencyProvider>
     <div className="flex min-h-screen bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100">
       {/* Desktop sidebar */}
       <aside className="hidden md:flex w-64 shrink-0 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex-col p-4">
@@ -121,6 +123,7 @@ export default function DashboardShell({
             <span className="font-bold text-gray-900 dark:text-white text-sm">Nego Bot</span>
           </div>
           <div className="flex items-center gap-1">
+            <CurrencySelect />
             <ThemeToggle />
             <NotificationBell />
             <button onClick={logout} aria-label="Sign out" className="p-2 rounded-lg text-gray-500 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-400 transition-colors">
@@ -142,6 +145,7 @@ export default function DashboardShell({
             />
           </form>
           <div className="ml-auto flex items-center gap-1.5">
+            <CurrencySelect />
             <button aria-label="Messages" className="w-9 h-9 rounded-full border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-500 hover:text-green-700 hover:border-green-300 transition-colors">
               <Mail className="w-4 h-4" />
             </button>
@@ -184,5 +188,6 @@ export default function DashboardShell({
         })}
       </nav>
     </div>
+    </CurrencyProvider>
   );
 }
