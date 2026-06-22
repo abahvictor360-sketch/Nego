@@ -129,7 +129,7 @@ export default function SupportClient({ initialTickets }: { initialTickets: Admi
                     <div
                       className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm ${
                         m.authorRole === 'admin'
-                          ? 'bg-green-900 text-gray-950 rounded-tr-sm'
+                          ? 'bg-green-900 text-white rounded-tr-sm'
                           : 'bg-gray-100 text-gray-900 rounded-tl-sm'
                       }`}
                     >
@@ -154,7 +154,7 @@ export default function SupportClient({ initialTickets }: { initialTickets: Admi
                 <button
                   onClick={sendReply}
                   disabled={pending || !reply.trim()}
-                  className="bg-green-900 text-gray-950 font-semibold p-2.5 rounded-xl hover:bg-green-700 transition-colors disabled:opacity-50"
+                  className="bg-green-900 text-white font-semibold p-2.5 rounded-xl hover:bg-green-700 transition-colors disabled:opacity-50"
                 >
                   <Send className="w-4 h-4" />
                 </button>

@@ -130,7 +130,7 @@ export default function EmailSettingsClient({ initial }: { initial: EmailSetting
           </div>
         )}
 
-        <button onClick={save} disabled={pending} className="bg-green-900 text-gray-950 text-sm font-semibold px-5 py-2 rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50">
+        <button onClick={save} disabled={pending} className="bg-green-900 text-white text-sm font-semibold px-5 py-2 rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50">
           {pending ? 'Saving…' : 'Save Settings'}
         </button>
       </section>

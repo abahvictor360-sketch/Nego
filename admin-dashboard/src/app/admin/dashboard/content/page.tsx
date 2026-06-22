@@ -126,7 +126,7 @@ export default function AdminContentPage() {
           <button
             onClick={save}
             disabled={saving}
-            className="bg-green-900 text-gray-950 text-sm font-semibold px-5 py-2 rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50"
+            className="bg-green-900 text-white text-sm font-semibold px-5 py-2 rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50"
           >
             {saving ? 'Saving…' : 'Save Changes'}
           </button>
@@ -140,7 +140,7 @@ export default function AdminContentPage() {
             key={t.id}
             onClick={() => setTab(t.id)}
             className={`flex-1 flex items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-all whitespace-nowrap ${
-              tab === t.id ? 'bg-green-900 text-gray-950' : 'text-gray-500 hover:text-gray-900'
+              tab === t.id ? 'bg-green-900 text-white' : 'text-gray-500 hover:text-gray-900'
             }`}
           >
             <t.Icon className="w-4 h-4" />
