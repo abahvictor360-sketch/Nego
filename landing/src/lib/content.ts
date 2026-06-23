@@ -107,7 +107,7 @@ const DEFAULTS: SiteContent = {
     cta_secondary: 'Try Live Demo',
     stats: [
       { label: '2,847 Deals Closed', icon: 'handshake', color: 'text-green-400' },
-      { label: '$1.2M Revenue Protected', icon: 'shield', color: 'text-green-300' },
+      { label: '$1.2M Revenue Protected', icon: 'shield', color: 'text-white' },
       { label: '94% Margin Preserved', icon: 'trending-up', color: 'text-blue-400' },
     ],
   },
