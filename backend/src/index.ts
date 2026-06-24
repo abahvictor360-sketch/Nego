@@ -23,7 +23,7 @@ const PORT = process.env.PORT ?? 3001;
 // Security & parsing
 app.use(helmet());
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '100kb' }));
 
 // Serve widget bundle as a public static file
 app.use(express.static(path.join(__dirname, '..', 'public'), {
@@ -52,10 +52,12 @@ app.get('/health', (_req: Request, res: Response) => {
   res.json({ status: 'ok', service: 'nego-bot', timestamp: new Date().toISOString() });
 });
 
-// Global error handler
+// Global error handler — log full detail server-side, never leak internals to clients.
 app.use((err: Error & { code?: string }, _req: Request, res: Response, _next: NextFunction) => {
-  console.error('[ERROR]', err.code ?? '', err.message);
-  res.status(500).json({ error: 'Internal server error', detail: err.message });
+  console.error('[ERROR]', err.code ?? '', err.message, err.stack);
+  const body: { error: string; detail?: string } = { error: 'Internal server error' };
+  if (process.env.NODE_ENV !== 'production') body.detail = err.message;
+  res.status(500).json(body);
 });
 
 app.listen(PORT, () => {
