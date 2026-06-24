@@ -23,7 +23,7 @@ const LANGUAGE_INSTRUCTIONS: Record<string, string> = {
 
 export function buildSystemPrompt(
   product: ProductContext,
-  botName = 'Max',
+  botName = 'Abah',
   language = 'en',
 ): string {
   const price = Number(product.listPrice).toFixed(2);

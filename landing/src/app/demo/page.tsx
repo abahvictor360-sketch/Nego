@@ -7,11 +7,11 @@ import { Sparkles, ArrowRight, ShieldCheck, Zap, Bot } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Live Demo',
-  description: 'Negotiate with Max, the Nego Bot AI, in a real live demo — and watch the floor-price guard in action.',
+  description: 'Negotiate with Abah, the Nego Bot AI, in a real live demo — and watch the floor-price guard in action.',
 };
 
 const points = [
-  { Icon: Bot, title: 'Real AI negotiation', text: 'Max counters, defends value, and closes — powered by the same engine merchants use.' },
+  { Icon: Bot, title: 'Real AI negotiation', text: 'Abah counters, defends value, and closes — powered by the same engine merchants use.' },
   { Icon: ShieldCheck, title: 'Floor price protected', text: 'Try to lowball him. The hidden floor price is enforced server-side and never given up.' },
   { Icon: Zap, title: 'Instant checkout', text: 'Reach a deal and the bot generates a signed checkout link on the spot.' },
 ];
@@ -30,7 +30,7 @@ export default function DemoPage() {
             <h1 className="text-5xl sm:text-6xl font-bold tracking-tight text-gray-900 mb-4">
               Haggle with{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-green-500">
-                Max, right now.
+                Abah, right now.
               </span>
             </h1>
             <p className="text-lg text-gray-500 max-w-xl mx-auto">

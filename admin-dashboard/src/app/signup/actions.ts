@@ -55,7 +55,7 @@ export async function registerAction(
     email: merchant.email,
     apiKey: merchant.apiKey,
     role: merchant.role ?? 'merchant',
-    botName: merchant.botName ?? 'Max',
+    botName: merchant.botName ?? 'Abah',
     language: merchant.language ?? 'en',
   });
 

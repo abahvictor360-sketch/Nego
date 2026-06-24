@@ -61,9 +61,9 @@ export default function Hero({ content }: { content: HeroContent }) {
             {/* Center: main deal card */}
             <div className="glass rounded-2xl p-4 shadow-xl shadow-green-100 absolute left-1/2 -translate-x-1/2 top-4 w-64 animate-float">
               <div className="flex items-center gap-2 mb-3">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center text-white text-xs font-bold">M</div>
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center text-white text-xs font-bold">A</div>
                 <div>
-                  <p className="text-xs font-semibold text-gray-800">Max · Nego Bot</p>
+                  <p className="text-xs font-semibold text-gray-800">Abah · Nego Bot</p>
                   <p className="text-[10px] text-green-500 font-medium">● Online</p>
                 </div>
               </div>

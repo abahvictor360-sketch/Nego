@@ -30,7 +30,7 @@ export default function Demo() {
     if (!DEMO_API_KEY || !DEMO_PRODUCT_ID) {
       setMessages([{
         role: 'assistant',
-        text: 'Hi! I\'m Max, your negotiation assistant.\n\nThis is a live demo of Nego Bot. To enable live negotiations, set NEXT_PUBLIC_DEMO_API_KEY and NEXT_PUBLIC_DEMO_PRODUCT_ID.\n\nFor now, try the real app by signing up above!',
+        text: 'Hi! I\'m Abah, your negotiation assistant.\n\nThis is a live demo of Nego Bot. To enable live negotiations, set NEXT_PUBLIC_DEMO_API_KEY and NEXT_PUBLIC_DEMO_PRODUCT_ID.\n\nFor now, try the real app by signing up above!',
       }]);
       setStatus('open');
       return;
@@ -50,10 +50,10 @@ export default function Demo() {
       setProduct({ name, price });
       setMessages([{
         role: 'assistant',
-        text: `Hi! I'm Max. The ${name} is listed at $${price}. Make me an offer and let's see if we can strike a deal!`,
+        text: `Hi! I'm Abah. The ${name} is listed at $${price}. Make me an offer and let's see if we can strike a deal!`,
       }]);
     } catch {
-      setMessages([{ role: 'assistant', text: "Hi! I'm Max. Unfortunately I can't connect to the demo backend right now. Sign up to try for real!" }]);
+      setMessages([{ role: 'assistant', text: "Hi! I'm Abah. Unfortunately I can't connect to the demo backend right now. Sign up to try for real!" }]);
     } finally {
       setLoading(false);
     }
@@ -101,17 +101,17 @@ export default function Demo() {
             </div>
             <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-5">
               Try it right now.{' '}
-              <span className="text-green-600">Negotiate with Max.</span>
+              <span className="text-green-600">Negotiate with Abah.</span>
             </h2>
             <p className="text-lg text-gray-500 mb-6 leading-relaxed">
-              Max is our AI negotiator. He'll engage you in a real price conversation,
+              Abah is our AI negotiator. He'll engage you in a real price conversation,
               make counter-offers, and close the deal — all while secretly protecting
               the merchant's floor price.
             </p>
             <ul className="space-y-3">
               {[
                 'Start by making a low offer',
-                'See how Max counters and defends value',
+                'See how Abah counters and defends value',
                 'Watch the floor price guard in action',
               ].map(tip => (
                 <li key={tip} className="flex items-center gap-3 text-sm text-gray-600">
@@ -131,7 +131,7 @@ export default function Demo() {
                   <div className="w-16 h-16 rounded-2xl bg-green-600 text-white flex items-center justify-center mx-auto mb-4 shadow-lg shadow-green-300">
                     <MessageCircle className="w-8 h-8" />
                   </div>
-                  <h3 className="font-bold text-gray-900 text-lg mb-2">Chat with Max</h3>
+                  <h3 className="font-bold text-gray-900 text-lg mb-2">Chat with Abah</h3>
                   <p className="text-sm text-gray-500 mb-6">
                     Our AI negotiator is ready. Try to get a deal below the listed price!
                   </p>
@@ -147,9 +147,9 @@ export default function Demo() {
                 <div className="bg-white rounded-2xl border border-gray-200 shadow-2xl shadow-gray-100 overflow-hidden flex flex-col" style={{ height: '480px' }}>
                   {/* Header */}
                   <div className="flex items-center gap-3 px-4 py-3 bg-green-600 text-white">
-                    <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-sm font-bold">M</div>
+                    <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-sm font-bold">A</div>
                     <div>
-                      <p className="text-sm font-semibold">Max · Nego Bot</p>
+                      <p className="text-sm font-semibold">Abah · Nego Bot</p>
                       <p className="text-[11px] text-green-200">{product.name} · ${product.price}</p>
                     </div>
                     <div className="ml-auto">

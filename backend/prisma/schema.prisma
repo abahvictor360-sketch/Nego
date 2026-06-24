@@ -16,7 +16,7 @@ model Merchant {
   role      String   @default("merchant") // "merchant" | "admin"
   plan      String   @default("free")     // "free" | "pro"
   status    String   @default("active")   // "active" | "suspended"
-  botName   String   @default("Max")
+  botName   String   @default("Abah")
   language  String   @default("en")
   createdAt DateTime @default(now())
 

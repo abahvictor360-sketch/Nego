@@ -43,7 +43,7 @@ export default function NegoWidget({
       const price = parseFloat(s.product.listPrice).toFixed(2);
       setMessages([{
         role: 'assistant',
-        text: `Hi! I'm Max, your negotiation assistant. The ${s.product.name} is listed at ${s.product.currency} ${price}. Make me an offer and let's see if we can make a deal!`,
+        text: `Hi! I'm Abah, your negotiation assistant. The ${s.product.name} is listed at ${s.product.currency} ${price}. Make me an offer and let's see if we can make a deal!`,
       }]);
     } catch {
       setInitError('Could not connect to negotiation service. Please try again.');

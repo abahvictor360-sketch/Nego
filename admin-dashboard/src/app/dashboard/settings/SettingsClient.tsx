@@ -95,7 +95,7 @@ export default function SettingsClient({ name, email, apiKey, botName, language,
               name="botName"
               defaultValue={botName}
               maxLength={50}
-              placeholder="Max"
+              placeholder="Abah"
               required
               className="w-full rounded-lg border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white px-3 py-2 text-sm outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition-all"
             />

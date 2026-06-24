@@ -32,30 +32,30 @@ const cols = [
   {
     title: 'Integrations',
     links: [
-      { label: 'WooCommerce', href: '#' },
-      { label: 'Shopify', href: '#' },
-      { label: 'Stripe', href: '#' },
-      { label: 'BigCommerce', href: '#' },
-      { label: 'Custom API', href: '#' },
+      { label: 'WooCommerce', href: '/integrations#woocommerce' },
+      { label: 'Shopify', href: '/integrations#shopify' },
+      { label: 'Stripe', href: '/integrations#stripe' },
+      { label: 'BigCommerce', href: '/integrations#bigcommerce' },
+      { label: 'Custom API', href: '/integrations#custom-api' },
     ],
   },
   {
     title: 'Company',
     links: [
-      { label: 'About', href: '#' },
-      { label: 'Blog', href: '#' },
-      { label: 'Careers', href: '#' },
-      { label: 'Press Kit', href: '#' },
-      { label: 'Contact', href: 'mailto:hello@negotiobot.com' },
+      { label: 'About', href: '/about' },
+      { label: 'Blog', href: '/blog' },
+      { label: 'Careers', href: '/careers' },
+      { label: 'Press Kit', href: '/press' },
+      { label: 'Contact', href: '/contact' },
     ],
   },
   {
     title: 'Legal',
     links: [
-      { label: 'Privacy Policy', href: '#' },
-      { label: 'Terms of Service', href: '#' },
-      { label: 'Cookie Policy', href: '#' },
-      { label: 'Security', href: '#' },
+      { label: 'Privacy Policy', href: '/privacy' },
+      { label: 'Terms of Service', href: '/terms' },
+      { label: 'Cookie Policy', href: '/cookies' },
+      { label: 'Security', href: '/security' },
     ],
   },
 ];
@@ -105,12 +105,9 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="border-t border-gray-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="border-t border-gray-800 pt-8">
           <p className="text-xs text-gray-600">
             © {new Date().getFullYear()} Nego Bot. All rights reserved.
-          </p>
-          <p className="text-xs text-gray-600">
-            Built with Claude Opus 4 · Powered by Anthropic
           </p>
         </div>
       </div>

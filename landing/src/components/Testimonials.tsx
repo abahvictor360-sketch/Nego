@@ -22,7 +22,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "Our in-store QR negotiations are a hit. Shoppers scan, haggle with Max, and check out on their phone. It feels premium and totally on-brand.",
+      "Our in-store QR negotiations are a hit. Shoppers scan, haggle with Abah, and check out on their phone. It feels premium and totally on-brand.",
     name: 'Priya Nair',
     role: 'Retail Director, Lumen Home',
     initials: 'PN',
